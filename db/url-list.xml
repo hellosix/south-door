@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<elements>
+	<element key="hhhh" value="{&quot;proxyPort&quot;:8090,&quot;showName&quot;:&quot;hhhh&quot;,&quot;describe&quot;:&quot;&quot;,&quot;url&quot;:&quot;http://127.0.0.1/index&quot;,&quot;group&quot;:&quot;ggg2&quot;}"/>
+	<element key="cccc" value="{&quot;proxyPort&quot;:0,&quot;showName&quot;:&quot;cccc&quot;,&quot;describe&quot;:&quot;&quot;,&quot;url&quot;:&quot;http://www.runoob.com/&quot;,&quot;group&quot;:&quot;g1&quot;}"/>
+	<element key="fda" value="{&quot;proxyPort&quot;:8072,&quot;showName&quot;:&quot;fda&quot;,&quot;describe&quot;:&quot;&quot;,&quot;url&quot;:&quot;http://127.0.0.1:8081/urllist&quot;,&quot;group&quot;:&quot;ggg2&quot;}"/>
+	<element key="dddffff" value="{&quot;proxyPort&quot;:0,&quot;showName&quot;:&quot;dddffff&quot;,&quot;describe&quot;:&quot;&quot;,&quot;url&quot;:&quot;http://blog.csdn.net/medwardm/article/details/52528236&quot;,&quot;group&quot;:&quot;g1&quot;}"/>
+	<element key="dsafdsa" value="{&quot;proxyPort&quot;:0,&quot;showName&quot;:&quot;dsafdsa&quot;,&quot;describe&quot;:&quot;&quot;,&quot;url&quot;:&quot;https://gojs.net/latest/index.html&quot;,&quot;group&quot;:&quot;g1&quot;}"/>
+	<element key="ddddd" value="{&quot;proxyPort&quot;:0,&quot;showName&quot;:&quot;ddddd&quot;,&quot;describe&quot;:&quot;&quot;,&quot;url&quot;:&quot;http://www.jb51.net/article/109396.htm&quot;,&quot;group&quot;:&quot;g1&quot;}"/>
+	<element key="a111" value="{&quot;proxyPort&quot;:0,&quot;showName&quot;:&quot;a111&quot;,&quot;describe&quot;:&quot;&quot;,&quot;url&quot;:&quot;http://www.jb51.net/article/109396.htm&quot;,&quot;group&quot;:&quot;g1&quot;}"/>
+	<element key="casda" value="{&quot;proxyPort&quot;:0,&quot;showName&quot;:&quot;casda&quot;,&quot;describe&quot;:&quot;&quot;,&quot;url&quot;:&quot;http://www.jb51.net/article/109396.htm&quot;,&quot;group&quot;:&quot;g1&quot;}"/>
+	<element key="fdsafd" value="{&quot;proxyPort&quot;:0,&quot;showName&quot;:&quot;fdsafd&quot;,&quot;describe&quot;:&quot;&quot;,&quot;url&quot;:&quot;http://www.jb51.net/article/109396.htm&quot;,&quot;group&quot;:&quot;g1&quot;}"/>
+	<element key="hgfdgds" value="{&quot;proxyPort&quot;:0,&quot;showName&quot;:&quot;hgfdgds&quot;,&quot;describe&quot;:&quot;&quot;,&quot;url&quot;:&quot;http://www.jb51.net/article/109396.htm&quot;,&quot;group&quot;:&quot;g1&quot;}"/>
+	<element key="g3333" value="{&quot;proxyPort&quot;:0,&quot;showName&quot;:&quot;g3333&quot;,&quot;describe&quot;:&quot;&quot;,&quot;url&quot;:&quot;http://www.jb51.net/article/109396.htm&quot;,&quot;group&quot;:&quot;g1&quot;}"/>
+	<element key="h555" value="{&quot;proxyPort&quot;:0,&quot;showName&quot;:&quot;h555&quot;,&quot;describe&quot;:&quot;&quot;,&quot;url&quot;:&quot;http://www.jb51.net/article/109396.htm&quot;,&quot;group&quot;:&quot;g1&quot;}"/>
+	<element key="j7777" value="{&quot;proxyPort&quot;:0,&quot;showName&quot;:&quot;j7777&quot;,&quot;describe&quot;:&quot;&quot;,&quot;url&quot;:&quot;http://www.jb51.net/article/109396.htm&quot;,&quot;group&quot;:&quot;g1&quot;}"/>
+	<element key="test1" value="{&quot;proxyPort&quot;:8070,&quot;showName&quot;:&quot;test1&quot;,&quot;describe&quot;:&quot;&quot;,&quot;url&quot;:&quot;http://127.0.0.1:8081/index&quot;,&quot;group&quot;:&quot;g1&quot;}"/>
+	<element key="test2" value="{&quot;proxyPort&quot;:0,&quot;showName&quot;:&quot;test2&quot;,&quot;describe&quot;:&quot;&quot;,&quot;url&quot;:&quot;http://127.0.0.1:8081/index&quot;,&quot;group&quot;:&quot;g2&quot;}"/>
+	<element key="test3" value="{&quot;proxyPort&quot;:0,&quot;showName&quot;:&quot;test3&quot;,&quot;describe&quot;:&quot;&quot;,&quot;url&quot;:&quot;http://127.0.0.1:8081/index&quot;,&quot;group&quot;:&quot;g2&quot;}"/>
+</elements>

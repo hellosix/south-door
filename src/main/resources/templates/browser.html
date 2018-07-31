@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/header" />
+<style>
+	#browser-iframe{
+		border: none;
+	}
+	#browser-url{
+		width: 350px;
+	}
+	.nav-height{
+		height:50px;
+	}
+	body{
+		overflow-y: hidden;
+	}
+</style>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<a class="navbar-brand" href="/index"><span class="glyphicon glyphicon-home"></span> southDoor</a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li><a href="/urllist">url</a></li>
+				<li><a href="/proxylist" id="add-url-button">proxy</a></li>
+				<li class="active"><a href="/browser">browser</a></li>
+			</ul>
+			<div class="navbar-form navbar-right" role="search">
+				<div class="form-group">
+					<input type="text" id="browser-url" class="form-control" placeholder="http://127.0.0.1:2181" />
+				</div>
+				<button  id="browser-url-refresh" class="btn btn-default glyphicon glyphicon-refresh"></button>
+				<button  id="browser-url-open-window" class="btn btn-default glyphicon glyphicon-fullscreen"></button>
+			</div>
+		</div><!-- /.navbar-collapse -->
+
+	</div><!-- /.container-fluid -->
+</nav>
+<div class="clearfix nav-height"></div>
+<div>
+	<iframe src="/browser/default" id="browser-iframe" width="100%"></iframe>
+</div><!-- .container-fluid -->
+
+<script src="../js/browser.js"></script>
+<script th:inline="JavaScript">
+	/*<![CDATA[*/
+
+	/*]]>*/
+</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+.nav-height{
+    height: 100px;
+}
+
+.float-header{
+    height:42px;
+}
+.add-header{
+    margin-top: 0px;
+    margin-right: 0px;
+    float: right;
+}
+
+.string { color: green; }
+.number { color: darkorange; }
+.boolean { color: blue; }
+.null { color: magenta; }
+.key { color: red; }
+
+pre{
+    border-radius: 0px;
+    background-color: rgb(254, 255, 250);
+}
+
+.ui-autocomplete{
+    z-index: 10000;
+}
+
+.alert{
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-color: #faebcc;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+
+.operate{
+    width:100px;
+}

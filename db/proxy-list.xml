@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<elements>
+	<element key="8073" value="{&quot;proxyPort&quot;:8073,&quot;port&quot;:8081,&quot;ip&quot;:&quot;127.0.0.1&quot;,&quot;describe&quot;:&quot;&quot;,&quot;group&quot;:&quot;g1&quot;}"/>
+	<element key="8074" value="{&quot;proxyPort&quot;:8074,&quot;port&quot;:8081,&quot;ip&quot;:&quot;127.0.0.1&quot;,&quot;describe&quot;:&quot;&quot;,&quot;group&quot;:&quot;itemservice&quot;}"/>
+	<element key="8071" value="{&quot;proxyPort&quot;:8071,&quot;port&quot;:8081,&quot;ip&quot;:&quot;127.0.0.1&quot;,&quot;describe&quot;:&quot;&quot;,&quot;group&quot;:&quot;&quot;}"/>
+	<element key="8072" value="{&quot;proxyPort&quot;:8072,&quot;port&quot;:8081,&quot;ip&quot;:&quot;127.0.0.1&quot;,&quot;describe&quot;:&quot;&quot;,&quot;group&quot;:&quot;&quot;}"/>
+</elements>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8" />
+
+	<link rel="stylesheet" href="../app/menu/css/style.css" />
+	<link rel="stylesheet" href="../app/3ditem/demo.css?v=2" />
+	<link rel="stylesheet" href="../app/page/css/styles.css" />
+	<link href="../bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+	<link href="../flat/dist/css/flat-ui.css" rel="stylesheet" />
+
+	<script src="../jquery/jquery-2.2.3.min.js"></script>
+	<script src="../bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../app/page/js/modernizr.js"></script>
+
+  	<style>
+		body{
+			overflow-y: auto;
+			overflow-x: hidden;
+
+		}
+		.table-bordered {
+			border: 1px solid #ddd;
+		}
+		.table-bordered>tbody>tr>th{
+			border: 1px solid #ddd;
+		}
+		.table {
+			width: 100%;
+			max-width: 100%;
+			margin-bottom: 20px;
+			text-align: left;
+		}
+		table {
+			background-color: transparent;
+		}
+
+		table {
+			border-spacing: 0;
+			border-collapse: collapse;
+		}
+
+		table {
+			display: table;
+			border-collapse: separate;
+			border-spacing: 2px;
+			border-color: grey;
+		}
+
+		.url-wrapper{
+			float:left;
+		}
+		.nav-btn{
+			cursor: pointer;
+		}
+		.nav-btn.active{
+			font-weight: bold;
+		}
+		.url-box{
+			font-family: "Oleo Script";
+			font-size: 30px;
+			width: 310px;
+			height: 101px;
+			border-radius: 5px;
+			background: linear-gradient(to bottom, rgba(236,241,244,1) 0%,rgba(190,202,217,1) 100%);
+		}
+		.url-box strong{
+			position: relative;
+			display: block;
+			top: 20px;
+			text-align: center;
+		}
+
+		.manager-div{
+			background-color: #edeff1;
+			padding: 24px 23px 20px;
+			margin: 0 auto;
+			border-radius: 6px;
+			position: relative;
+			top:40px;
+		}
+		.float-form{
+			float: left;
+			margin-right: 10px;
+		}
+		.height-input{
+			height:22px;
+		}
+		.logo-font{
+			left: 0px;
+			margin-left: 10px;
+			font-family: "Oleo Script";
+			font-size: 30px;
+			color: #fff;
+			position: fixed;
+		}
+		.without-proxy{
+
+		}
+		.normal-proxy{
+			background: linear-gradient(to bottom, rgba(236,241,244,1) 0%,rgb(170, 228, 177) 100%);
+		}
+		.hidden{
+			display: none;
+		}
+		.alert{
+			color: #8a6d3b;
+			background-color: #fcf8e3;
+			border-color: #faebcc;
+			padding: 15px;
+			margin-bottom: 20px;
+			border: 1px solid transparent;
+			border-radius: 4px;
+		}
+	</style>
+</head>
+
+<body>
+<div style="height:50px;width:100%;background-color: #213e5a">
+<div class="logo-font">SouthDoor</div>
+</div>
+  <div id="menu" style="width: 230px;index:10000">
+		<div class="hamburger">
+			<div class="line"></div>
+			<div class="line"></div>
+			<div class="line"></div>
+		</div>
+		<div class="menu-inner">
+
+			<nav>
+				<ul>
+					<li data-target="1" class="nav-btn nav-page1 active">UserCenter</li>
+					<li data-target="2" class="nav-btn nav-page2">UrlManager</li>
+					<li data-target="3" class="nav-btn nav-page3">ProxyManager</li>
+				</ul>
+			</nav>
+		</div>
+
+		<svg version="1.1" id="blob">
+			<path id="blob-path" d="M60,500H0V0h60c0,0,20,172,20,250S60,900,60,500z"/>
+		</svg>
+  </div>
+  <div style="padding-left: 230px;position: absolute;left: 0px;width:100%;">
+	  <div class="wrapper active-page1" style="padding-left: 240px;">
+		  <div class="page page1" id="show-user-center"></div>
+		  <div class="page page2">
+			  <div class="manager-div">
+				  <div class="form-group float-form">
+					  <input type="text" class="form-control height-input" value="" name="showName" placeholder="showName" />
+				  </div>
+
+				  <div class="form-group float-form">
+					  <input type="text" class="form-control height-input" style="width: 300px" name="url" placeholder="http://127.0.0.1/index.html"  />
+				  </div>
+
+				  <div class="form-group float-form">
+					  <input type="text" class="form-control height-input" value="" name="proxyPort" placeholder="proxyPort"  />
+				  </div>
+
+				  <div class="form-group float-form" style="margin-top: 5px">
+					  <a class="btn btn-primary btn-lg btn-block" data-loading-text="Check..."  id="add-url-model" href="javascript:void(0)">Add</a>
+				  </div>
+
+				  <br/><br/>
+				  <div class="alert div-alert-warning hidden" id="url-manager-alert">
+
+				  </div>
+
+				  <table class="table table-bordered">
+					  <thead>
+					  <tr>
+						  <th>ShowName</th>
+						  <th>Url</th>
+						  <th>Port</th>
+						  <th>Operate</th>
+					  </tr>
+					  </thead>
+					  <tbody id="show-url-list">
+
+					  </tbody>
+				  </table>
+			  </div>
+		  </div>
+		  <div class="page page3">
+			  <div class="manager-div">
+				  <div class="form-group float-form">
+					  <input type="text" class="form-control height-input" value="" name="p-proxy-port" placeholder="ProxyPort" />
+				  </div>
+
+				  <div class="form-group float-form">
+					  <input type="text" class="form-control height-input" value="" name="p-port" placeholder="Port"  />
+				  </div>
+
+				  <div class="form-group float-form">
+					  <input type="text" class="form-control height-input" value="" name="p-ip" placeholder="IP"  />
+				  </div>
+
+				  <div class="form-group float-form" style="margin-top: 5px">
+					  <a class="btn btn-primary btn-lg btn-block" data-loading-text="Check..."  id="add-proxy-model" href="javascript:void(0)">Add</a>
+				  </div>
+
+				  <br/><br/>
+				  <div class="alert div-alert-warning hidden" id="proxy-manager-alert">
+
+				  </div>
+				  <table class="table table-bordered">
+					  <thead>
+					  <tr>
+						  <th>ProxyPort</th>
+						  <th>Port</th>
+						  <th>IP</th>
+						  <th>Operate</th>
+					  </tr>
+					  </thead>
+					  <tbody id="show-proxy-list">
+
+					  </tbody>
+				  </table>
+			  </div>
+		  </div>
+	  </div>
+  </div>
+
+  <script src="../app/menu/js/index.js"></script>
+  <script type="text/javascript" src="../app/3ditem/modernizr.custom.34807.js"></script>
+  <script type="text/javascript" src="../app/3ditem/item.js"></script>
+  <script src='../app/page/js/stopExecutionOnTimeout.js?t=1'></script>
+  <script src='../app/page/js/page.js'></script>
+  <script src='../js/common.js'></script>
+  <script src='../js/south_door.js'></script>
+  <script src="../html2canvas/html2canvas.js"></script>
+<script type="text/javascript">
+	/*
+	html2canvas(document.body).then(function(canvas) {
+		document.body.appendChild(canvas);
+	});
+	*/
+</script>
+</body>
+</html>

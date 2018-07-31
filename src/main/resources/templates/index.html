@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.springframework.org/schema/mvc">
+<head>
+	<meta charset="UTF-8" />
+	<link href="../css/common.css" rel="stylesheet" charset="utf-8"/>
+	<link href="../bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" charset="utf-8"/>
+	<script src="../jquery/jquery-2.2.3.min.js"></script>
+	<script src="../bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+
+	<style>
+		ul,ol,li,div{margin:0;padding:0;border:0;}
+		ul,ol,li{list-style:none;}
+		body{margin:0 auto; height:100%;}
+		table{border-collapse:collapse;border-spacing:0;}
+		html{ height:100%;}
+
+		.pr{ position:relative;}
+		.pa{ position:absolute;text-align: center;}
+		.none{ display:none;}
+		body{
+			overflow-x: hidden;
+		}
+		#wrap{ width:100%; position:relative; height:100%;}
+		#scroll_box{ width:100%;}
+		.roll_ul{ position:absolute; left:0; top:7%;}
+		.roll_ul li{float:left;padding-bottom: 50px;}
+
+		.weblist{ width:85%; margin:0 auto; top:-20%;}
+		.weblist a{ display:block; float:left; display:inline; width:21%; height:15%; overflow:hidden;margin:0 0 3% 3%;}
+		.weblist img{ width:100%; display:block; }
+
+		.prev,.next{ cursor:pointer; width:8%; height:50%; top:0;}
+		.prev{ left:0; background:url(../images/arrow_l.png) no-repeat center 44%;}
+		.prev:hover{background:#f8f8f8 url(../images/arrow_l.png) no-repeat center 44%;}
+		.next{ right:0;background:url(../images/arrow_r.png) no-repeat center 44%;}
+		.next:hover{background:#f8f8f8 url(../images/arrow_r.png) no-repeat center 44%;}
+		.banner-children{top:50%}
+
+		#scroll_nav{ width:100%; text-align:center; height:45px; overflow:hidden; background:#f8f8f8; border-top:1px solid #d7d7d7;  position:fixed; left:0; text-align:center; bottom:0;}
+		#scroll_nav b{ width:80px; border-top:5px solid #d5d5d5; color:#999; display:inline-block; height:30px; margin-right:12px; line-height:30px; cursor:pointer;}
+		#scroll_nav b.current{ border-top:5px solid #7f7f7f; color:#7f7f7f;}
+
+
+		.container-fluid{
+			padding-right: 0px;
+			padding-left: 0px;
+		}
+		.url-box{
+			width: 100%;
+			height: 170px;
+			overflow: hidden;
+		}
+		.url-box-header{
+			width: 100%;
+			height: 25px;
+			background-color: #e7e7e7;
+			border-top-left-radius:3px;
+			border-top-right-radius:3px;
+			font-size: 14px;
+			padding-left: 4px;
+			padding-top: 2px;
+			border-bottom: 1px solid #e0cfcf;
+		}
+		.box-header-con{
+			color: #000000;
+		}
+
+		div.proxy-true{
+			background-color: #defbde;
+		}
+		.url-box-body{
+			width: 100%;
+			height: 150px;
+		}
+		.box-header-img > img{
+			width: 17px;
+			height: 17px;
+			margin-top: 2px;
+			margin-right: 5px;
+		}
+		.weblist > a{
+			border: 1px solid #e7e7e7;
+			border-radius:3px;
+		}
+
+		.weblist > a:hover{
+			border: 1px solid #6cc3e7;
+		}
+	</style>
+
+</head>
+
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top"  style="margin-bottom:0px">
+	<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header" style="margin-left: 15px">
+			<a class="navbar-brand" style="color: #fff;" href="/index"><span class="glyphicon glyphicon-home"></span> southDoor</a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+				<li><a href="/urllist">url</a></li>
+				<li><a href="/proxylist" id="add-url-button">proxy</a></li>
+				<li><a href="/browser">browser</a></li>
+			</ul>
+		</div><!-- /.navbar-collapse -->
+	</div><!-- /.container-fluid -->
+</nav>
+<div class="clearfix nav-height"></div>
+<div class="container-fluid">
+	<div id="wrap">
+		<div id="scroll_box">
+			<ul class="roll_ul">
+
+			</ul>
+			<a href="#" class="prev pa none" id="banner_prev"></a>
+			<a href="#" class="next pa" id="banner_next"></a>
+		</div>
+		<div id="scroll_nav">
+		</div>
+	</div>
+</div><!-- .container-fluid -->
+
+<script src="../js/common.js"></script>
+<script src="../js/index.js"></script>
+<script th:inline="JavaScript">
+	/*<![CDATA[*/
+
+	/*]]>*/
+</script>
+</body>
+</html>
