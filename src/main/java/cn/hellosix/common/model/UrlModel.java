@@ -1,6 +1,6 @@
 package cn.hellosix.common.model;
 
-import net.sf.json.JSONObject;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.stereotype.Component;
 
 /**
@@ -27,9 +27,8 @@ public class UrlModel {
         this.describe = describe;
     }
 
-    public static UrlModel unSerializa(String str) {
-        JSONObject jsonObject = JSONObject.fromObject(str);
-        UrlModel urlModel = (UrlModel) JSONObject.toBean(jsonObject, UrlModel.class);
+    public static UrlModel unSerialized(String str) {
+        UrlModel urlModel = JSONObject.parseObject(str, UrlModel.class);
         return urlModel;
     }
 
@@ -73,7 +72,7 @@ public class UrlModel {
         this.describe = describe;
     }
 
-    public String serializa() {
-        return JSONObject.fromObject(this).toString();
+    public String serialized() {
+        return JSONObject.toJSONString(this);
     }
 }

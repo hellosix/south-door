@@ -14,7 +14,7 @@
 	<element key="g3333" value="{&quot;proxyPort&quot;:0,&quot;showName&quot;:&quot;g3333&quot;,&quot;describe&quot;:&quot;&quot;,&quot;url&quot;:&quot;http://www.jb51.net/article/109396.htm&quot;,&quot;group&quot;:&quot;g1&quot;}"/>
 	<element key="h555" value="{&quot;proxyPort&quot;:0,&quot;showName&quot;:&quot;h555&quot;,&quot;describe&quot;:&quot;&quot;,&quot;url&quot;:&quot;http://www.jb51.net/article/109396.htm&quot;,&quot;group&quot;:&quot;g1&quot;}"/>
 	<element key="j7777" value="{&quot;proxyPort&quot;:0,&quot;showName&quot;:&quot;j7777&quot;,&quot;describe&quot;:&quot;&quot;,&quot;url&quot;:&quot;http://www.jb51.net/article/109396.htm&quot;,&quot;group&quot;:&quot;g1&quot;}"/>
-	<element key="test1" value="{&quot;proxyPort&quot;:8070,&quot;showName&quot;:&quot;test1&quot;,&quot;describe&quot;:&quot;&quot;,&quot;url&quot;:&quot;http://127.0.0.1:8081/index&quot;,&quot;group&quot;:&quot;g1&quot;}"/>
-	<element key="test2" value="{&quot;proxyPort&quot;:0,&quot;showName&quot;:&quot;test2&quot;,&quot;describe&quot;:&quot;&quot;,&quot;url&quot;:&quot;http://127.0.0.1:8081/index&quot;,&quot;group&quot;:&quot;g2&quot;}"/>
-	<element key="test3" value="{&quot;proxyPort&quot;:0,&quot;showName&quot;:&quot;test3&quot;,&quot;describe&quot;:&quot;&quot;,&quot;url&quot;:&quot;http://127.0.0.1:8081/index&quot;,&quot;group&quot;:&quot;g2&quot;}"/>
+	<element key="test1" value="{&quot;group&quot;:&quot;g1&quot;,&quot;proxyPort&quot;:8070,&quot;showName&quot;:&quot;test1&quot;,&quot;url&quot;:&quot;http://127.0.0.1:8081/index&quot;}"/>
+	<element key="test2" value="{&quot;group&quot;:&quot;g2&quot;,&quot;showName&quot;:&quot;test2&quot;,&quot;url&quot;:&quot;http://127.0.0.1:8081/index&quot;}"/>
+	<element key="test3" value="{&quot;group&quot;:&quot;g2&quot;,&quot;showName&quot;:&quot;test3&quot;,&quot;url&quot;:&quot;http://127.0.0.1:8081/index&quot;}"/>
 </elements>

@@ -34,13 +34,15 @@ public class UrlLogic {
                 if (tmpArr.length >= 2) {
                     String httpProxy = tmpArr[0];
                     String fullPath = tmpArr[1];
-                    String path = fullPath.substring(fullPath.indexOf(":"));
-                    String ip = NetUtil.getLocalIp();
-                    showUrl = httpProxy + "//" + ip;
-                    showUrl += ":" + proxyPort;
-                    if (path.indexOf("/") > -1) {
-                        path = path.substring(path.indexOf("/"));
-                        showUrl += path;
+                    if (fullPath.contains(":")) {
+                        String path = fullPath.substring(fullPath.indexOf(":"));
+                        String ip = NetUtil.getLocalIp();
+                        showUrl = httpProxy + "//" + ip;
+                        showUrl += ":" + proxyPort;
+                        if (path.indexOf("/") > -1) {
+                            path = path.substring(path.indexOf("/"));
+                            showUrl += path;
+                        }
                     }
                 }
             } catch (Exception e) {

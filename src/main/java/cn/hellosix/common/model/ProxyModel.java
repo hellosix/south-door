@@ -1,6 +1,6 @@
 package cn.hellosix.common.model;
 
-import net.sf.json.JSONObject;
+import com.alibaba.fastjson.JSONObject;
 
 /**
  * Created by lzz on 2018/2/4.
@@ -10,11 +10,9 @@ public class ProxyModel {
     private int port;
     private String ip;
     private String group;
-    private String describe;
+    private String description;
 
-    public ProxyModel() {
-
-    }
+    public ProxyModel() {}
 
     public ProxyModel(int proxyPort, int port, String ip) {
         this.proxyPort = proxyPort;
@@ -22,17 +20,16 @@ public class ProxyModel {
         this.ip = ip;
     }
 
-    public ProxyModel(int proxyPort, int port, String ip, String group, String describe) {
+    public ProxyModel(int proxyPort, int port, String ip, String group, String description) {
         this.proxyPort = proxyPort;
         this.port = port;
         this.ip = ip;
         this.group = group;
-        this.describe = describe;
+        this.description = description;
     }
 
-    public static ProxyModel unSerializa(String str) {
-        JSONObject jsonObject = JSONObject.fromObject(str);
-        ProxyModel proxyModel = (ProxyModel) JSONObject.toBean(jsonObject, ProxyModel.class);
+    public static ProxyModel unSerialized(String str) {
+        ProxyModel proxyModel = JSONObject.parseObject(str, ProxyModel.class);
         return proxyModel;
     }
 
@@ -68,15 +65,15 @@ public class ProxyModel {
         this.group = group;
     }
 
-    public String getDescribe() {
-        return describe;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescribe(String describe) {
-        this.describe = describe;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String serializa() {
-        return JSONObject.fromObject(this).toString();
+    public String serialized() {
+        return JSONObject.toJSONString(this);
     }
 }

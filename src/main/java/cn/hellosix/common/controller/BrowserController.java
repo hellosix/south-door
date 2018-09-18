@@ -2,7 +2,7 @@ package cn.hellosix.common.controller;
 
 import cn.hellosix.common.logic.ProxyLogic;
 import cn.hellosix.common.model.Response;
-import net.sf.json.JSONObject;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +30,7 @@ public class BrowserController {
     @RequestMapping(value = "/tmp-proxy", method = RequestMethod.POST)
     @ResponseBody
     public Response tmpProxy(@RequestBody String urlObj) {
-        JSONObject jsonObject = JSONObject.fromObject(urlObj);
+        JSONObject jsonObject = JSONObject.parseObject(urlObj);
         return proxyLogic.getProxyUrl(jsonObject.getString("url"));
     }
 }

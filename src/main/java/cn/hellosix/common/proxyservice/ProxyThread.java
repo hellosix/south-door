@@ -12,7 +12,6 @@ import java.net.SocketTimeoutException;
 /**
  * Created by lzz on 2018/2/2.
  */
-
 public class ProxyThread implements Runnable {
     private transient static Log logger = LogFactory.getLog(ProxyThread.class);
     private ProxyModel proxyModel;

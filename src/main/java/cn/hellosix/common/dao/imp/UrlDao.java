@@ -21,9 +21,9 @@ public class UrlDao implements IUrlDao {
         UrlModel urlModel1 = new UrlModel("test1", "http://127.0.0.1:8081/index", 8070, "g1", null);
         UrlModel urlModel2 = new UrlModel("test2", "http://127.0.0.1:8081/index", null, "g2", null);
         UrlModel urlModel3 = new UrlModel("test3", "http://127.0.0.1:8081/index", null, "g2", null);
-        xmlUtil.add("test1", urlModel1.serializa());
-        xmlUtil.add("test2", urlModel2.serializa());
-        xmlUtil.add("test3", urlModel3.serializa());
+        xmlUtil.add("test1", urlModel1.serialized());
+        xmlUtil.add("test2", urlModel2.serialized());
+        xmlUtil.add("test3", urlModel3.serialized());
     }
 
     @Override
@@ -32,7 +32,7 @@ public class UrlDao implements IUrlDao {
         XmlUtil xmlUtil = new XmlUtil(URL_DB);
         boolean res = true;
         try {
-            xmlUtil.add(showName, urlModel.serializa());
+            xmlUtil.add(showName, urlModel.serialized());
         } catch (Exception e) {
             res = false;
         }
@@ -46,7 +46,7 @@ public class UrlDao implements IUrlDao {
         Map<String, String> urlMap = xmlUtil.getAllMap();
         for (Map.Entry<String, String> element : urlMap.entrySet()) {
             String value = element.getValue();
-            urlList.add(UrlModel.unSerializa(value));
+            urlList.add(UrlModel.unSerialized(value));
         }
         return urlList;
     }
@@ -67,6 +67,6 @@ public class UrlDao implements IUrlDao {
     public UrlModel getUrlModel(String showName) {
         XmlUtil xmlUtil = new XmlUtil(URL_DB);
         String res = xmlUtil.get(showName);
-        return UrlModel.unSerializa(res);
+        return UrlModel.unSerialized(res);
     }
 }

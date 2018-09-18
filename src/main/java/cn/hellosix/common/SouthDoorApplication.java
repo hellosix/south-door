@@ -9,13 +9,13 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  */
 @SpringBootApplication
 @EnableScheduling
-public class Application {
+public class SouthDoorApplication {
 
     public static void main(String[] args) {
         /**
          * ProxyManager.scheduleRun()
          */
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(SouthDoorApplication.class, args);
     }
 
 }

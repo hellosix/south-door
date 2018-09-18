@@ -23,8 +23,8 @@ public class ProxyDao implements IProxyDao {
         XmlUtil xmlUtil = new XmlUtil(URL_DB);
         ProxyModel proxyModel1 = new ProxyModel(8071, 8081, "127.0.0.1");
         ProxyModel proxyModel2 = new ProxyModel(8072, 8081, "127.0.0.1");
-        xmlUtil.add(String.valueOf(proxyModel1.getProxyPort()), proxyModel1.serializa());
-        xmlUtil.add(String.valueOf(proxyModel2.getProxyPort()), proxyModel2.serializa());
+        xmlUtil.add(String.valueOf(proxyModel1.getProxyPort()), proxyModel1.serialized());
+        xmlUtil.add(String.valueOf(proxyModel2.getProxyPort()), proxyModel2.serialized());
     }
 
     public static Map<Integer, ProxyModel> getProxyMeta() {
@@ -34,7 +34,7 @@ public class ProxyDao implements IProxyDao {
         for (Map.Entry<String, String> element : allProxy.entrySet()) {
             Integer key = Integer.valueOf(element.getKey());
             String value = element.getValue();
-            resMap.put(key, ProxyModel.unSerializa(value));
+            resMap.put(key, ProxyModel.unSerialized(value));
         }
         return resMap;
     }
@@ -44,7 +44,7 @@ public class ProxyDao implements IProxyDao {
         XmlUtil xmlUtil = new XmlUtil(URL_DB);
         boolean res = true;
         try {
-            res = xmlUtil.add(String.valueOf(proxyModel.getProxyPort()), proxyModel.serializa());
+            res = xmlUtil.add(String.valueOf(proxyModel.getProxyPort()), proxyModel.serialized());
         } catch (Exception e) {
             res = false;
         }
@@ -78,6 +78,6 @@ public class ProxyDao implements IProxyDao {
     public ProxyModel getProxyPort(Integer port) {
         XmlUtil xmlUtil = new XmlUtil(URL_DB);
         String proxyStr = xmlUtil.get(String.valueOf(port));
-        return ProxyModel.unSerializa(proxyStr);
+        return ProxyModel.unSerialized(proxyStr);
     }
 }
