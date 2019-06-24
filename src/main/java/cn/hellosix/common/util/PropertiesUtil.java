@@ -14,7 +14,7 @@ import java.util.Properties;
 public class PropertiesUtil {
     public static Map<String, String> propertiesMap = new HashMap<>();
     private static int UPDATE_TIME = 60000;
-    private static String DEFAULT_CONFIG_FILE = "application.properties";
+    private static String DEFAULT_CONFIG_FILE = "application.yml";
 
     static {
         loadProperties(true);

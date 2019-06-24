@@ -1,0 +1,24 @@
+server:
+  port: 8000
+
+#image.db.path: /Users/lzz/work/java/south-door/src/main/resources/public/images/db
+#image:
+#  db:
+#  path: /Users/lzz/work/java/south-door/target/classes/public/images/db
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/south_door
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    druid.initial-size: 5
+      max-active: 5
+      min-idle: 5
+
+# mybatis
+mybatis:
+  type-aliases-package: org.hellosix.door.dao
+  configuration:
+    map-underscore-to-camel-case: true

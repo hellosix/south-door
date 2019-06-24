@@ -14,7 +14,6 @@ public class UrlModel {
     private String group;
     private String describe;
 
-
     public UrlModel() {
 
     }
