@@ -1,9 +1,5 @@
 package org.hellosix.south.door.proxy;
 
-import cn.hellosix.common.dao.imp.ProxyDao;
-import cn.hellosix.common.model.ProxyModel;
-import cn.hellosix.common.proxyservice.ProxyThread;
-import cn.hellosix.common.util.NetUtil;
 import org.hellosix.south.door.dao.SiteInfoDao;
 import org.hellosix.south.door.model.SiteInfo;
 import org.slf4j.Logger;
@@ -18,8 +14,6 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.*;
-
-import static java.util.concurrent.Executors.newCachedThreadPool;
 
 /**
  * 管理所有代理网站
