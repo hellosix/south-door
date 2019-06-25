@@ -50,12 +50,12 @@ public class SiteInfo extends SiteGroup{
         this.address = address;
     }
 
-    public Boolean getProxy() {
+    public Boolean getIsProxy() {
         return isProxy;
     }
 
-    public void setProxy(Boolean proxy) {
-        isProxy = proxy;
+    public void setIsProxy(Boolean isProxy) {
+        this.isProxy = isProxy;
     }
 
     public Integer getProxyPort() {

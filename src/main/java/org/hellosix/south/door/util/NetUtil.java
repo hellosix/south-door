@@ -1,4 +1,4 @@
-package cn.hellosix.common.util;
+package org.hellosix.south.door.util;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,6 +31,7 @@ public class NetUtil {
             String ip = getLocalIp();
             res = checkIpAndPort(ip, port);
         } catch (Exception ignore) {
+
         }
         return res;
     }

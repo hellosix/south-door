@@ -22,3 +22,7 @@ mybatis:
   type-aliases-package: org.hellosix.door.dao
   configuration:
     map-underscore-to-camel-case: true
+
+
+south-door:
+  max-proxy-size: 200
