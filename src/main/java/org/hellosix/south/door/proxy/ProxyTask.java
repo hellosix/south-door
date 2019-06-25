@@ -27,6 +27,11 @@ public class ProxyTask implements Runnable {
 
     private ExecutorService transDataThreadPool;
 
+    // TODO: 可能有问题
+    private TransDataTask clientToRemoteThread;
+
+    private TransDataTask remoteToClientThread;
+
     public ProxyTask(ExecutorService transDataThreadPool, SiteInfo siteInfo, boolean isStart) {
         this.transDataThreadPool = transDataThreadPool;
         this.siteInfo = siteInfo;
@@ -63,18 +68,16 @@ public class ProxyTask implements Runnable {
                 logger.error("create proxy port " + proxyPort + " for " + address + "failed", e2);
             }
         }
-
-
     }
 
     private void clientToRemote(Socket clientSocket, Socket remoteServerSocket) {
-        Runnable clientToRemoteThread = new TransDataTask(clientSocket, remoteServerSocket, isStart);
+        clientToRemoteThread = new TransDataTask(clientSocket, remoteServerSocket, isStart);
         transDataThreadPool.submit(clientToRemoteThread);
         logger.info("client to remote is start......");
     }
 
     private void remoteToClient(Socket remoteServerSocket, Socket clientSocket) {
-        Runnable remoteToClientThread = new TransDataTask(remoteServerSocket, clientSocket, isStart);
+        remoteToClientThread = new TransDataTask(remoteServerSocket, clientSocket, isStart);
         transDataThreadPool.submit(remoteToClientThread);
         logger.info("remote to client is start......");
     }
@@ -86,6 +89,8 @@ public class ProxyTask implements Runnable {
      */
     public void stop() throws IOException {
         serverSocket.close();
+        clientToRemoteThread.stop();
+        remoteToClientThread.stop();
         isStart = false;
     }
 }

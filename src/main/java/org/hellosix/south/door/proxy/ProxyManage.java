@@ -88,7 +88,7 @@ public class ProxyManage implements ApplicationListener<ContextRefreshedEvent> {
         ProxyTask proxyTask = proxySiteMap.get(siteId);
         // logger.info("stop siteInfo.getSiteName ")
         try {
-
+            proxyTask.stop();
         } catch (Exception e) {
 
         } finally {

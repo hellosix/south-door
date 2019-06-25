@@ -49,13 +49,11 @@ public class TransDataTask implements Runnable {
                     out.flush();
                 } catch (Exception e) {
                     logger.error("", e);
-                    try {
-                        in.close();
-                        out.close();
-                    } catch (IOException ex) {
-                        logger.error("close input or out stream error.", e);
-                    }
+                    closeStream(in, out);
                     break;
+                }
+                if (!isStart) {
+                    closeStream(in, out);
                 }
             }
         }  finally {
@@ -71,6 +69,28 @@ public class TransDataTask implements Runnable {
                 logger.error("shutdown socket error", e);
             }
         }
+    }
+
+    private void closeStream(InputStream in, OutputStream out) {
+        if (in != null) {
+            try {
+                in.close();
+            } catch (IOException e) {
+                logger.error("close input stream error.", e);
+            }
+        }
+        if (out != null) {
+            try {
+                out.close();
+            } catch (IOException e) {
+                logger.error("close output stream error.", e);
+            }
+        }
+    }
+
+
+    public void stop() {
+        this.isStart = false;
     }
 
 }
