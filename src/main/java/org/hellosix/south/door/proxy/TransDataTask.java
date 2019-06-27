@@ -21,18 +21,18 @@ public class TransDataTask implements Runnable {
 
     private Socket putDataSocket;
 
-    private boolean isStart;
+    private ProxySwitch proxySwitch;
 
-    public TransDataTask(Socket getDataSocket, Socket putDataSocket, boolean isStart) {
+    public TransDataTask(Socket getDataSocket, Socket putDataSocket, ProxySwitch proxySwitch) {
         this.getDataSocket = getDataSocket;
         this.putDataSocket = putDataSocket;
-        this.isStart = isStart;
+        this.proxySwitch = proxySwitch;
     }
 
     @Override
     public void run() {
         try {
-            while (isStart) {
+            while (proxySwitch.getStatus()) {
                 InputStream in = null;
                 OutputStream out = null;
                 try {
@@ -51,9 +51,6 @@ public class TransDataTask implements Runnable {
                     logger.error("", e);
                     closeStream(in, out);
                     break;
-                }
-                if (!isStart) {
-                    closeStream(in, out);
                 }
             }
         }  finally {
@@ -88,9 +85,5 @@ public class TransDataTask implements Runnable {
         }
     }
 
-
-    public void stop() {
-        this.isStart = false;
-    }
 
 }
