@@ -14,14 +14,6 @@ import java.util.List;
  */
 public interface SiteGroupDao {
 
-    /**
-     * 判断表是否存在
-     *
-     * @return
-     */
-    @Select("SHOW TABLES LIKE 'site_group';")
-    List isExistSiteGroupTable();
-
     @Select("SELECT * FROM site_group WHERE group_id = #{groupId}")
     SiteGroup selectGroupById(String groupId);
 

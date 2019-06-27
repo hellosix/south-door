@@ -1,4 +1,4 @@
-package org.hellosix.south.door.proxy;
+package org.hellosix.south.door.proxy.tcp;
 
 /**
  * Created by lzz on 2017/9/11.
@@ -13,26 +13,26 @@ import java.io.OutputStream;
 import java.net.Socket;
 
 
-public class TransDataTask implements Runnable {
+public class TcpTransDataTask implements Runnable {
 
-    private static Logger logger = LoggerFactory.getLogger(TransDataTask.class);
+    private static Logger logger = LoggerFactory.getLogger(TcpTransDataTask.class);
 
     private Socket getDataSocket;
 
     private Socket putDataSocket;
 
-    private ProxySwitch proxySwitch;
+    private TcpProxySwitch tcpProxySwitch;
 
-    public TransDataTask(Socket getDataSocket, Socket putDataSocket, ProxySwitch proxySwitch) {
+    public TcpTransDataTask(Socket getDataSocket, Socket putDataSocket, TcpProxySwitch tcpProxySwitch) {
         this.getDataSocket = getDataSocket;
         this.putDataSocket = putDataSocket;
-        this.proxySwitch = proxySwitch;
+        this.tcpProxySwitch = tcpProxySwitch;
     }
 
     @Override
     public void run() {
         try {
-            while (proxySwitch.getStatus()) {
+            while (tcpProxySwitch.getStatus()) {
                 InputStream in = null;
                 OutputStream out = null;
                 try {

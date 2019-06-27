@@ -1,17 +1,17 @@
-package org.hellosix.south.door.proxy;
+package org.hellosix.south.door.proxy.tcp;
 
 /**
  *
  * @author lzz
  * @date 2018/2/2
  */
-public class ProxySwitch {
+public class TcpProxySwitch {
 
     boolean status = true;
 
-    public ProxySwitch(){}
+    public TcpProxySwitch(){}
 
-    public ProxySwitch(boolean status) {
+    public TcpProxySwitch(boolean status) {
         this.status = status;
     }
 

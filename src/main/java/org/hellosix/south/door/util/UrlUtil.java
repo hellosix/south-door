@@ -2,7 +2,9 @@ package org.hellosix.south.door.util;
 
 import javafx.util.Pair;
 
-import java.net.URI;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,13 +26,51 @@ public class UrlUtil {
         while (matcher.find()) {
             ip = matcher.group(1);
             port = Integer.valueOf(matcher.group(2));
-            System.out.println("ip:" + ip);
-            System.out.println("port:" + port);
         }
         return new Pair<>(ip, port);
     }
 
-    public static void main(String[] args) {
-        getIpPort("http://10.16.50.209:8888/getitadsfa/gwetgas/fsadf");
+    /**
+     * eg:
+     * http://127.0.0.1:8000/group/groupId -> http://127.0.0.1:8000/
+     *
+     * @param address
+     * @return
+     */
+    public static String getBaseUrl(String address) {
+        Pattern pattern = Pattern.compile("((([A-Za-z]{3,9}:(?:\\/\\/)?)(?:[-;:&=\\+\\$,\\w]+@)?[A-Za-z0-9.-]+(:[0-9]+)?|(?:ww\u200C\u200Bw.|[-;:&=\\+\\$,\\w]+@)[A-Za-z0-9.-]+)((?:\\/[\\+~%\\/.\\w-_]*)?\\??(?:[-\\+=&;%@.\\w_]*)#?\u200C\u200B(?:[\\w]*))?)");
+        //pattern = Pattern.compile("(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]");
+        Matcher matcher = pattern.matcher(address);
+        String baseUrl = null;
+        while (matcher.find()) {
+            baseUrl = matcher.group(1);
+        }
+        return baseUrl;
+    }
+
+    public static String getProtocol(String address) {
+        Pattern pattern = Pattern.compile("(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]");
+        Matcher matcher = pattern.matcher(address);
+        String protocol = null;
+        while (matcher.find()) {
+            protocol = matcher.group(1);
+        }
+        return protocol;
+    }
+
+    public static String getProxyAddress(String originAddress, int proxyPort) throws UnknownHostException {
+        String originDomain = getBaseUrl(originAddress);
+        String localIp = NetUtil.getLocalIp();
+        String proxyDomain = getProtocol(originAddress) + "://" + localIp + ":" + proxyPort;
+        return originAddress.replace(originDomain, proxyDomain);
+    }
+
+
+    public static void main(String[] args) throws MalformedURLException, UnknownHostException {
+        String baseUrl = getBaseUrl("https://101.52.12.44:1234/getitadsfa/gwetgas/fsadf");
+        System.out.println(baseUrl);
+
+        String proxyAddress = getProxyAddress("https://101.52.12.44:1234/getitadsfa/gwetgas/fsadf", 5555);
+        System.out.println(proxyAddress);
     }
 }

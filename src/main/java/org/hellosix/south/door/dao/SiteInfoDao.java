@@ -14,13 +14,6 @@ import java.util.List;
  */
 public interface SiteInfoDao {
 
-    /**
-     * 判断表是否存在
-     *
-     * @return
-     */
-    @Select("SHOW TABLES LIKE 'site_info';")
-    List isExistSiteInfoTable();
 
     @Select("SELECT * FROM site_info WHERE site_id = #{siteId}")
     SiteInfo selectSiteInfoById(String siteId);

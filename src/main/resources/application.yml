@@ -26,3 +26,5 @@ mybatis:
 
 south-door:
   max-proxy-size: 200
+  # default: http, other: tcp
+  proxy-type: http
