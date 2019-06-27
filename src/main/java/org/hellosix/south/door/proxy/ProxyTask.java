@@ -21,7 +21,7 @@ public class ProxyTask implements Runnable {
 
     private SiteInfo siteInfo;
 
-    private boolean isStart;
+    private ProxySwitch proxySwitch;
 
     private ServerSocket serverSocket;
 
@@ -35,7 +35,7 @@ public class ProxyTask implements Runnable {
     public ProxyTask(ExecutorService transDataThreadPool, SiteInfo siteInfo, boolean isStart) {
         this.transDataThreadPool = transDataThreadPool;
         this.siteInfo = siteInfo;
-        this.isStart = isStart;
+        this.proxySwitch = new ProxySwitch(isStart);
     }
 
     @Override
@@ -48,8 +48,8 @@ public class ProxyTask implements Runnable {
             Integer originPort = ipPort.getValue();
             try {
                 serverSocket = new ServerSocket(proxyPort);
-                // logger.info("proxyPort=" + proxyPort + ";remoteIp=" + remoteIp + ";remotePort=" + remotePort);
-                while (isStart) {
+                logger.info("proxyPort=" + proxyPort + ";remoteIp=" + originIp + ";remotePort=" + originPort);
+                while (proxySwitch.getStatus()) {
                     logger.info("start create proxy for " + address);
                     Socket clientSocket = null;
                     Socket remoteServerSocket = null;
@@ -71,13 +71,13 @@ public class ProxyTask implements Runnable {
     }
 
     private void clientToRemote(Socket clientSocket, Socket remoteServerSocket) {
-        clientToRemoteThread = new TransDataTask(clientSocket, remoteServerSocket, isStart);
+        clientToRemoteThread = new TransDataTask(clientSocket, remoteServerSocket, proxySwitch);
         transDataThreadPool.submit(clientToRemoteThread);
         logger.info("client to remote is start......");
     }
 
     private void remoteToClient(Socket remoteServerSocket, Socket clientSocket) {
-        remoteToClientThread = new TransDataTask(remoteServerSocket, clientSocket, isStart);
+        remoteToClientThread = new TransDataTask(remoteServerSocket, clientSocket, proxySwitch);
         transDataThreadPool.submit(remoteToClientThread);
         logger.info("remote to client is start......");
     }
@@ -89,8 +89,6 @@ public class ProxyTask implements Runnable {
      */
     public void stop() throws IOException {
         serverSocket.close();
-        clientToRemoteThread.stop();
-        remoteToClientThread.stop();
-        isStart = false;
+        proxySwitch.setStatus(false);
     }
 }
