@@ -83,12 +83,13 @@ public class ProxyManage implements ApplicationListener<ContextRefreshedEvent> {
         }
     }
 
-    public boolean stopProxyThread(SiteInfo siteInfo) {
-        String siteId = siteInfo.getSiteId();
+    public boolean stopProxyThread(String siteId) {
         ProxyTask proxyTask = proxySiteMap.get(siteId);
         // logger.info("stop siteInfo.getSiteName ")
         try {
             proxyTask.stop();
+            SiteInfo siteInfo = siteInfoDao.selectSiteInfoById(siteId);
+            logger.info("stop proxy thread for site " + siteInfo.getSiteName());
         } catch (Exception e) {
 
         } finally {
