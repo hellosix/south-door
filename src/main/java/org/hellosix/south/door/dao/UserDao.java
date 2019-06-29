@@ -10,8 +10,8 @@ import org.hellosix.south.door.model.User;
  */
 public interface UserDao {
 
-    @Select("SELECT * FROM user WHERE user_id = #{userId}")
-    User selectUserById(String userId);
+    @Select("SELECT * FROM user WHERE user_name = #{userName} AND password = #{password}")
+    User selectUserByUserNameAndPassword(User user);
 
     @Insert("INSERT INFO user (user_id, user_name, password, head_pic)" +
             "VALUES (#{userId}, #{userName}, #{password}, #{headPic})")

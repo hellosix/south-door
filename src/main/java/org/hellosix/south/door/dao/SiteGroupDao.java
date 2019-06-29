@@ -17,6 +17,9 @@ public interface SiteGroupDao {
     @Select("SELECT * FROM site_group WHERE group_id = #{groupId}")
     SiteGroup selectGroupById(String groupId);
 
+    @Select("SELECT * FROM site_group WHERE group_name = #{groupName}")
+    SiteGroup selectGroupByName(String groupName);
+
     @Select("SELECT * FROM site_group")
     List<SiteGroup> selectGroupList();
 

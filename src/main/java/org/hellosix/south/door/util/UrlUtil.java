@@ -17,12 +17,17 @@ public class UrlUtil {
     private UrlUtil() {
     }
 
+    /**
+     * get ip and port
+     *
+     * @param address
+     * @return
+     */
     public static final Pair<String, Integer> getIpPort(String address) {
         Pattern pattern = Pattern.compile("(\\d+\\.\\d+\\.\\d+\\.\\d+)\\:(\\d+)");
         Matcher matcher = pattern.matcher(address);
         String ip = null;
         Integer port = null;
-        //将符合规则的提取出来
         while (matcher.find()) {
             ip = matcher.group(1);
             port = Integer.valueOf(matcher.group(2));
@@ -69,8 +74,9 @@ public class UrlUtil {
     public static void main(String[] args) throws MalformedURLException, UnknownHostException {
         String baseUrl = getBaseUrl("https://101.52.12.44:1234/getitadsfa/gwetgas/fsadf");
         System.out.println(baseUrl);
-
         String proxyAddress = getProxyAddress("https://101.52.12.44:1234/getitadsfa/gwetgas/fsadf", 5555);
         System.out.println(proxyAddress);
+        Pair<String, Integer> ipPort = getIpPort("https://baidu.com/getitadsfa/gwetgas/fsadf");
+        System.out.println(ipPort.getKey() + ipPort.getValue());
     }
 }

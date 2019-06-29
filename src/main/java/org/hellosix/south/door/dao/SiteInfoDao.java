@@ -18,6 +18,9 @@ public interface SiteInfoDao {
     @Select("SELECT * FROM site_info WHERE site_id = #{siteId}")
     SiteInfo selectSiteInfoById(String siteId);
 
+    @Select("SELECT * FROM site_info WHERE site_name = #{siteName}")
+    SiteInfo selectSiteInfoByName(String siteName);
+
     @Select("SELECT * FROM site_info")
     List<SiteInfo> selectSiteInfoList();
 
