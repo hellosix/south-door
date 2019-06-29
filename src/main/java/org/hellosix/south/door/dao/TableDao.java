@@ -1,5 +1,6 @@
 package org.hellosix.south.door.dao;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -8,31 +9,8 @@ import java.util.List;
  * @author Jay.H.Zou
  * @date 2019/6/27
  */
+@Mapper
 public interface TableDao {
-
-    /**
-     * 判断 site_group 表是否存在
-     *
-     * @return
-     */
-    @Select("SHOW TABLES LIKE 'site_group';")
-    List isExistSiteGroupTable();
-
-    /**
-     * 判断 site_info 表是否存在
-     *
-     * @return
-     */
-    @Select("SHOW TABLES LIKE 'site_info';")
-    List isExistSiteInfoTable();
-
-    /**
-     * 判断 user 表是否存在
-     *
-     * @return
-     */
-    @Select("SHOW TABLES LIKE 'user';")
-    List isExistUserTable();
 
     @Select("CREATE TABLE IF NOT EXISTS site_group (" +
             "group_id varchar(50) NOT NULL," +

@@ -39,19 +39,10 @@ public class InitializationConfig implements ApplicationListener<ContextRefreshe
     }
 
     private void initTables() {
-        List existUserTable = tableDao.isExistUserTable();
-        if (existUserTable == null || existUserTable.isEmpty()) {
-            tableDao.createUserTable();
-        }
+        tableDao.createUserTable();
 
-        List existSiteGroupTable = tableDao.isExistSiteGroupTable();
-        if (existSiteGroupTable == null || existSiteGroupTable.isEmpty()) {
-            tableDao.createSiteGroupTable();
-        }
+        tableDao.createSiteGroupTable();
 
-        List existSiteInfoTable = tableDao.isExistSiteInfoTable();
-        if (existSiteInfoTable == null || existSiteInfoTable.isEmpty()) {
-            tableDao.createSiteInfoTable();
-        }
+        tableDao.createSiteInfoTable();
     }
 }

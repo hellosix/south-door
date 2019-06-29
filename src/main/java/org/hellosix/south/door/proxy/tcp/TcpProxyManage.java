@@ -1,12 +1,7 @@
 package org.hellosix.south.door.proxy.tcp;
 
-import org.hellosix.south.door.dao.SiteInfoDao;
 import org.hellosix.south.door.model.SiteInfo;
 import org.hellosix.south.door.proxy.ProxyManageAbstract;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 

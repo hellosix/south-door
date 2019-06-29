@@ -1,9 +1,6 @@
 package org.hellosix.south.door.dao;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import org.hellosix.south.door.model.SiteInfo;
 
 import java.util.List;
@@ -12,6 +9,7 @@ import java.util.List;
  * @author Jay.H.Zou
  * @date 2019/6/24
  */
+@Mapper
 public interface SiteInfoDao {
 
 
@@ -27,7 +25,7 @@ public interface SiteInfoDao {
     @Select("SELECT * FROM site_info WHERE group_id = #{groupId}")
     List<SiteInfo> selectSiteInfoListByGroupId(String groupId);
 
-    @Insert("INSERT INFO site_info " +
+    @Insert("INSERT INTO site_info " +
             "(site_id, site_name, address, is_proxy, proxy_port, image_path, proxy_address, description, update_time)" +
             "VALUES (#{siteId}, #{siteName}, #{address}, #{isProxy}, #{proxyPort}, #{imagePath}, #{proxyAddress}, #{description}, #{updateTime})")
     int insertSiteInfo(SiteInfo siteInfo);
