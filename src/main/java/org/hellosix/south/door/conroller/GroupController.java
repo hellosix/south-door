@@ -39,7 +39,18 @@ public class GroupController {
     @RequestMapping(value = "/addGroup", method = RequestMethod.POST)
     @ResponseBody
     public Response addGroup(@RequestBody SiteGroup siteGroup) {
+        // 存在
+        if (siteGroupService.isExistSameGroupName(siteGroup)) {
+            return Response.fail(siteGroup.getGroupName() + " exist!");
+        }
         SiteGroup group = siteGroupService.addGroup(siteGroup);
+        return group != null ? Response.success(siteGroup) : Response.fail();
+    }
+
+    @RequestMapping(value = "/updateGroup", method = RequestMethod.POST)
+    @ResponseBody
+    public Response updateGroup(@RequestBody SiteGroup siteGroup) {
+        SiteGroup group = siteGroupService.updateGroup(siteGroup);
         return group != null ? Response.success(siteGroup) : Response.fail();
     }
 

@@ -19,15 +19,15 @@ public interface SiteInfoDao {
     @Select("SELECT * FROM site_info WHERE site_name = #{siteName}")
     SiteInfo selectSiteInfoByName(String siteName);
 
-    @Select("SELECT * FROM site_info")
+    @Select("SELECT site_info.*, site_group.group_name as group_name FROM site_info, site_group WHERE site_info.group_id = site_group.group_id")
     List<SiteInfo> selectSiteInfoList();
 
     @Select("SELECT * FROM site_info WHERE group_id = #{groupId}")
     List<SiteInfo> selectSiteInfoListByGroupId(String groupId);
 
     @Insert("INSERT INTO site_info " +
-            "(site_id, site_name, address, is_proxy, proxy_port, image_path, proxy_address, description, update_time)" +
-            "VALUES (#{siteId}, #{siteName}, #{address}, #{isProxy}, #{proxyPort}, #{imagePath}, #{proxyAddress}, #{description}, #{updateTime})")
+            "(site_id, group_id, site_name, address, is_proxy, proxy_port, image_path, proxy_address, description, update_time) " +
+            "VALUES (#{siteId}, #{groupId}, #{siteName}, #{address}, #{isProxy}, #{proxyPort}, #{imagePath}, #{proxyAddress}, #{description}, #{updateTime})")
     int insertSiteInfo(SiteInfo siteInfo);
 
     @Update("UPDATE site_info SET site_nam = #{siteName}, address = #{address}, is_proxy = #{isProxy}, proxy_port = #{proxyPort}," +

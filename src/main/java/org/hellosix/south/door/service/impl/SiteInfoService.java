@@ -100,7 +100,13 @@ public class SiteInfoService implements ISiteInfoService {
 
     @Override
     public boolean isExistSameSiteName(SiteInfo siteInfo) {
-        return false;
+        try {
+            SiteInfo site = siteInfoDao.selectSiteInfoByName(siteInfo.getSiteName());
+            return site != null;
+        } catch (Exception e) {
+            logger.error("get site info by name failed.", e);
+        }
+        return true;
     }
 
     @Override

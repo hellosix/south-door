@@ -54,18 +54,18 @@ public class SiteGroupService implements ISiteGroupService {
     }
 
     @Override
-    public boolean updateGroup(SiteGroup siteGroup) {
+    public SiteGroup updateGroup(SiteGroup siteGroup) {
         if (!verifyParam(siteGroup, true)) {
-            return false;
+            return null;
         }
         siteGroup.setUpdateTime(CommonUtil.getCurrentTimestamp());
         try {
             siteGroupDao.updateSiteGroup(siteGroup);
-            return true;
+            return siteGroup;
         } catch (Exception e) {
             logger.error("update site group failed, site group: " + siteGroup, e);
         }
-        return false;
+        return null;
     }
 
     @Override
@@ -88,11 +88,11 @@ public class SiteGroupService implements ISiteGroupService {
     public boolean isExistSameGroupName(SiteGroup siteGroup) {
         try {
             SiteGroup existSiteGroup = siteGroupDao.selectGroupByName(siteGroup.getGroupName());
-            return existSiteGroup == null;
+            return existSiteGroup != null;
         } catch (Exception e) {
             logger.error("get site group by name failed, " + siteGroup, e);
         }
-        return false;
+        return true;
     }
 
     @Override

@@ -12,7 +12,7 @@ public interface ISiteGroupService {
 
     SiteGroup addGroup(SiteGroup siteGroup);
 
-    boolean updateGroup(SiteGroup siteGroup);
+    SiteGroup updateGroup(SiteGroup siteGroup);
 
     /**
      * 当这个组下面仍然有 site，则直接返回 false

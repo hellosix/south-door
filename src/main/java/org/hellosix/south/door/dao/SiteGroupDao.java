@@ -26,8 +26,8 @@ public interface SiteGroupDao {
             "VALUES (#{groupId}, #{groupName}, #{description}, #{updateTime})")
     int insertSiteGroup(SiteGroup siteGroup);
 
-    @Update("UPDATE site_group" +
-            "SET group_name = #{groupName}, description = #{description}" +
+    @Update("UPDATE site_group " +
+            "SET group_name = #{groupName}, description = #{description} " +
             "WHERE group_id =  #{groupId}")
     int updateSiteGroup(SiteGroup siteGroup);
 
