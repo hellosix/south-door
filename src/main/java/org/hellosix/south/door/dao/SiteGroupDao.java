@@ -22,7 +22,7 @@ public interface SiteGroupDao {
     List<SiteGroup> selectGroupList();
 
     @Insert("INSERT INTO site_group " +
-            "(group_id, group_name, description, updateTime) " +
+            "(group_id, group_name, description, update_time) " +
             "VALUES (#{groupId}, #{groupName}, #{description}, #{updateTime})")
     int insertSiteGroup(SiteGroup siteGroup);
 

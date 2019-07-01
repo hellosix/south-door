@@ -1,11 +1,13 @@
 package org.hellosix.south.door.conroller;
 
+import org.hellosix.south.door.model.Response;
 import org.hellosix.south.door.model.SiteGroup;
 import org.hellosix.south.door.service.ISiteGroupService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,7 +30,24 @@ public class GroupController {
     @RequestMapping(value = "/getGroupList", method = RequestMethod.GET)
     @ResponseBody
     public List<SiteGroup> getGroupList() {
-        return siteGroupService.getSiteGroupList();
+        List<SiteGroup> siteGroupList = siteGroupService.getSiteGroupList();
+
+        logger.info(siteGroupList.toString());
+        return siteGroupList;
+    }
+
+    @RequestMapping(value = "/addGroup", method = RequestMethod.POST)
+    @ResponseBody
+    public Response addGroup(@RequestBody SiteGroup siteGroup) {
+        SiteGroup group = siteGroupService.addGroup(siteGroup);
+        return group != null ? Response.success(siteGroup) : Response.fail();
+    }
+
+    @RequestMapping(value = "/deleteGroupById", method = RequestMethod.POST)
+    @ResponseBody
+    public Response deleteGroupById(@RequestBody String groupId) {
+        boolean status = siteGroupService.deleteGroupById(groupId);
+        return status ? Response.success() : Response.fail();
     }
 
 }

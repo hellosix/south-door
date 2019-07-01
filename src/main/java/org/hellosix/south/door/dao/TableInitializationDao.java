@@ -3,14 +3,12 @@ package org.hellosix.south.door.dao;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
-import java.util.List;
-
 /**
  * @author Jay.H.Zou
  * @date 2019/6/27
  */
 @Mapper
-public interface TableDao {
+public interface TableInitializationDao {
 
     @Select("CREATE TABLE IF NOT EXISTS site_group (" +
             "group_id varchar(50) NOT NULL," +
@@ -23,6 +21,7 @@ public interface TableDao {
 
     @Select("CREATE TABLE IF NOT EXISTS site_info (" +
             "site_id varchar(50) NOT NULL," +
+            "group_id varchar(50) NOT NULL," +
             "site_name varchar(255) NOT NULL," +
             "address varchar(255) NOT NULL," +
             "is_proxy bit DEFAULT 0," +

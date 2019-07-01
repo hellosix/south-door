@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface ISiteGroupService {
 
-    boolean addGroup(SiteGroup siteGroup);
+    SiteGroup addGroup(SiteGroup siteGroup);
 
     boolean updateGroup(SiteGroup siteGroup);
 

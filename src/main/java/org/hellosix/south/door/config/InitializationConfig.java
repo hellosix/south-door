@@ -1,6 +1,6 @@
 package org.hellosix.south.door.config;
 
-import org.hellosix.south.door.dao.TableDao;
+import org.hellosix.south.door.dao.TableInitializationDao;
 import org.hellosix.south.door.service.impl.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.ContextRefreshedEvent;
-
-import java.util.List;
 
 /**
  * @author Jay.H.Zou
@@ -21,7 +19,7 @@ public class InitializationConfig implements ApplicationListener<ContextRefreshe
     private static final Logger logger = LoggerFactory.getLogger(InitializationConfig.class);
 
     @Autowired
-    private TableDao tableDao;
+    private TableInitializationDao tableInitializationDao;
 
     @Autowired
     private UserService userService;
@@ -39,10 +37,10 @@ public class InitializationConfig implements ApplicationListener<ContextRefreshe
     }
 
     private void initTables() {
-        tableDao.createUserTable();
+        tableInitializationDao.createUserTable();
 
-        tableDao.createSiteGroupTable();
+        tableInitializationDao.createSiteGroupTable();
 
-        tableDao.createSiteInfoTable();
+        tableInitializationDao.createSiteInfoTable();
     }
 }

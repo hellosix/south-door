@@ -38,19 +38,19 @@ public class SiteGroupService implements ISiteGroupService {
     private IProxyManage proxyManage;
 
     @Override
-    public boolean addGroup(SiteGroup siteGroup) {
+    public SiteGroup addGroup(SiteGroup siteGroup) {
         if (!verifyParam(siteGroup, false)) {
-            return false;
+            return null;
         }
         siteGroup.setGroupId(CommonUtil.getUUID());
         siteGroup.setUpdateTime(CommonUtil.getCurrentTimestamp());
         try {
             siteGroupDao.insertSiteGroup(siteGroup);
-            return true;
+            return siteGroup;
         } catch (Exception e) {
             logger.error("add site group to db failed, site group: " + siteGroup, e);
         }
-        return false;
+        return null;
     }
 
     @Override
@@ -110,7 +110,7 @@ public class SiteGroupService implements ISiteGroupService {
     @Override
     public List<SiteGroup> getSiteGroupList() {
         try {
-            siteGroupDao.selectGroupList();
+            return siteGroupDao.selectGroupList();
         } catch (Exception e) {
             logger.error("get site group list failed", e);
         }
