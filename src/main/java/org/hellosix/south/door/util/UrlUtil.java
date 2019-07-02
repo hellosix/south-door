@@ -32,7 +32,10 @@ public class UrlUtil {
             ip = matcher.group(1);
             port = Integer.valueOf(matcher.group(2));
         }
-        return new Pair<>(ip, port);
+        if (ip != null && port != null) {
+            return new Pair<>(ip, port);
+        }
+        return null;
     }
 
     /**
@@ -65,8 +68,7 @@ public class UrlUtil {
 
     public static String getProxyAddress(String originAddress, int proxyPort) throws UnknownHostException {
         String originDomain = getBaseUrl(originAddress);
-        String localIp = NetUtil.getLocalIp();
-        String proxyDomain = getProtocol(originAddress) + "://" + localIp + ":" + proxyPort;
+        String proxyDomain = getProtocol(originAddress) + "://" + NetUtil.LOCAL_IP + ":" + proxyPort;
         return originAddress.replace(originDomain, proxyDomain);
     }
 

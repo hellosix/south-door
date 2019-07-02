@@ -8,7 +8,9 @@ import org.hellosix.south.door.model.User;
  */
 public interface IUserService {
 
-    User getUser(User user);
+    User getUserByNameAndPassword(User user);
+
+    User getUserByName(User user);
 
     boolean createAdminUser();
 }

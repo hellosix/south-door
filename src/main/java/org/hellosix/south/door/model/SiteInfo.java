@@ -14,7 +14,7 @@ public class SiteInfo extends SiteGroup{
 
     private String address;
 
-    private Boolean isProxy;
+    private Boolean isProxy = Boolean.FALSE;
 
     private Integer proxyPort;
 

@@ -58,4 +58,11 @@ public class SiteInfoController {
         boolean status = siteInfoService.addSiteInfo(siteInfo);
         return status ? Response.success() : Response.fail();
     }
+
+    @RequestMapping(value = "/deleteSiteById", method = RequestMethod.POST)
+    @ResponseBody
+    public Response deleteSiteById(@RequestBody String siteId) {
+        boolean status = siteInfoService.deleteSiteInfo(siteId);
+        return status ? Response.success() : Response.fail();
+    }
 }

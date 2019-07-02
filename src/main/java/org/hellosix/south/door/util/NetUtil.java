@@ -15,6 +15,8 @@ public class NetUtil {
     private NetUtil() {
     }
 
+    public static String LOCAL_IP;
+
     /**
      * 获取本机 IP
      *
@@ -53,8 +55,7 @@ public class NetUtil {
     public static boolean accessPort(int port) {
         boolean result = false;
         try {
-            String ip = getLocalIp();
-            result = accessHost(ip, port);
+            result = accessHost(LOCAL_IP, port);
         } catch (Exception ignore) {
         }
         return result;

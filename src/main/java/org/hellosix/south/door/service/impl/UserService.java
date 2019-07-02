@@ -30,11 +30,8 @@ public class UserService implements IUserService {
     private String addminPassword;
 
     @Override
-    public User getUser(User user) {
-        if (user == null) {
-            return null;
-        }
-        if (StringUtils.isBlank(user.getUserName()) || StringUtils.isBlank(user.getPassword())) {
+    public User getUserByNameAndPassword(User user) {
+        if (user == null || StringUtils.isBlank(user.getUserName()) || StringUtils.isBlank(user.getPassword())) {
             return null;
         }
         try {
@@ -44,7 +41,20 @@ public class UserService implements IUserService {
             logger.error("get user failed, " + user, e);
             return null;
         }
+    }
 
+    @Override
+    public User getUserByName(User user) {
+        if (user == null || StringUtils.isBlank(user.getUserName())) {
+            return null;
+        }
+        try {
+            User existUser = userDao.selectUserByUserName(user);
+            return existUser;
+        } catch (Exception e) {
+            logger.error("get user failed, " + user, e);
+            return null;
+        }
     }
 
     @Override
@@ -52,7 +62,7 @@ public class UserService implements IUserService {
         User user = new User();
         user.setUserName(adminUserName);
         user.setPassword(addminPassword);
-        if (getUser(user) != null) {
+        if (getUserByName(user) != null) {
             logger.info(user.getUserName() + " exist.");
             return true;
         }

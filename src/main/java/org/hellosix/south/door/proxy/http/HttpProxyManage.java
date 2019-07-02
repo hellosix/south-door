@@ -40,36 +40,41 @@ public class HttpProxyManage extends ProxyManageAbstract implements ApplicationL
         List<SiteInfo> siteInfoList = siteInfoDao.selectSiteInfoList();
         if (siteInfoList != null && !siteInfoList.isEmpty()) {
             for (SiteInfo siteInfo : siteInfoList) {
-                if (siteInfo.getIsProxy()){
-                    try {
-                        addProxyTask(siteInfo);
-                    } catch (Exception e) {
-                        logger.error("start proxy task failed, site info: " + siteInfo, e);
-                    }
-                }
+                addProxyTask(siteInfo);
             }
+
         }
     }
 
     @Override
     public void addProxyTask(SiteInfo siteInfo) {
-        String siteId = siteInfo.getSiteId();
-        HttpProxyTask httpProxyTask = (HttpProxyTask) proxySiteMap.get(siteId);
-        if (httpProxyTask == null) {
-            httpProxyTask = new HttpProxyTask(siteInfo);
-            proxySiteMap.put(siteId, httpProxyTask);
+        if (siteInfo.getIsProxy()) {
+            try {
+                String siteId = siteInfo.getSiteId();
+                Runnable httpProxyTask = proxySiteMap.get(siteId);
+                if (httpProxyTask == null) {
+                    httpProxyTask = new HttpProxyTask(siteInfo);
+                    proxyThreadPool.submit(httpProxyTask);
+                    proxySiteMap.put(siteId, httpProxyTask);
+                }
+            } catch (Exception e) {
+                logger.error("start proxy task failed, site info: " + siteInfo, e);
+            }
         }
 
     }
 
     @Override
     public void stopProxyTask(String siteId) {
-        HttpProxyTask httpProxyTask = (HttpProxyTask) proxySiteMap.get(siteId);
+        Runnable runnable = proxySiteMap.get(siteId);
         logger.info("stopping server socket...");
         SiteInfo siteInfo = null;
         try {
+            if (runnable != null) {
+                HttpProxyTask httpProxyTask = (HttpProxyTask) runnable;
+                httpProxyTask.stop();
+            }
             siteInfo = siteInfoDao.selectSiteInfoById(siteId);
-            httpProxyTask.stop();
             logger.info("stopping server socket...");
         } catch (Exception e) {
             logger.error("server socket closed failed. site info: " + siteInfo);

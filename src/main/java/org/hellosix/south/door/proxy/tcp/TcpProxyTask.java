@@ -27,7 +27,6 @@ public class TcpProxyTask implements Runnable {
 
     private ExecutorService transDataThreadPool;
 
-    // TODO: 可能有问题
     private TcpTransDataTask clientToRemoteThread;
 
     private TcpTransDataTask remoteToClientThread;
@@ -43,6 +42,10 @@ public class TcpProxyTask implements Runnable {
         String address = siteInfo.getAddress();
         Integer proxyPort = siteInfo.getProxyPort();
         Pair<String, Integer> ipPort = UrlUtil.getIpPort(address);
+        if (ipPort == null) {
+            // if not ip and port, don't proxy for it
+            return;
+        }
         String originIp = ipPort.getKey();
         Integer originPort = ipPort.getValue();
         try {

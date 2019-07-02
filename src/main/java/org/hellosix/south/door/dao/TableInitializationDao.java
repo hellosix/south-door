@@ -24,7 +24,7 @@ public interface TableInitializationDao {
             "group_id varchar(50) NOT NULL," +
             "site_name varchar(255) NOT NULL," +
             "address varchar(255) NOT NULL," +
-            "is_proxy bit DEFAULT 0," +
+            "is_proxy tinyint(1) DEFAULT 0," +
             "proxy_port MEDIUMINT UNSIGNED DEFAULT NULL," +
             "image_path varchar(255) NOT NULL," +
             "proxy_address varchar(255) NOT NULL," +

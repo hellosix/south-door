@@ -64,7 +64,7 @@ public class SiteInfoService implements ISiteInfoService {
             }
         }
         siteInfo.setProxyAddress(address);
-        String imagePath = IMAGE_PATH_PREFIX + siteInfo.getSiteName().replaceAll(" ", "").toLowerCase() + IMAGE_NAME_SUFFIX;
+        String imagePath = IMAGE_PATH_PREFIX + siteInfo.getSiteName().replaceAll(" ", "-").toLowerCase() + IMAGE_NAME_SUFFIX;
         siteInfo.setImagePath(imagePath);
         // TODO: 添加图片
         try {
