@@ -7,12 +7,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletInputStream;
+import javax.servlet.http.HttpServletRequest;
 import javax.websocket.server.PathParam;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -27,6 +29,21 @@ public class SiteInfoController {
 
     @Autowired
     private ISiteInfoService siteInfoService;
+
+    @RequestMapping(value = "/saveSiteImage", method = RequestMethod.POST)
+    @ResponseBody
+    public Response saveSiteImage(@RequestParam("siteImage") MultipartFile multipartFile, HttpServletRequest request) throws IOException {
+        String path = request.getSession().getServletContext().getRealPath("/saveSiteImage");
+        System.err.println(multipartFile.getOriginalFilename());
+        System.out.println(path);
+        /*File filePath = new File(path);
+        System.out.println("文件的保存路径：" + path);
+        if (!filePath.exists() && !filePath.isDirectory()) {
+            System.out.println("目录不存在，创建目录:" + filePath);
+            filePath.mkdir();
+        }*/
+        return Response.success();
+    }
 
     @RequestMapping(value = "/getAllSite", method = RequestMethod.GET)
     @ResponseBody

@@ -9,9 +9,9 @@ server:
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://localhost:3306/south_door
+    url: jdbc:mysql://101.132.47.146:3306/south_door
     username: root
-    password: root
+    password: Coastline@918
     driver-class-name: com.mysql.cj.jdbc.Driver
     druid:
       initial-size: 5
