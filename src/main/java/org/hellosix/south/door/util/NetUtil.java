@@ -1,5 +1,8 @@
 package org.hellosix.south.door.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.*;
@@ -11,6 +14,8 @@ import java.net.*;
  * @date 2018/2/5.
  */
 public class NetUtil {
+
+    private static final Logger logger = LoggerFactory.getLogger(NetUtil.class);
 
     private NetUtil() {
     }
@@ -39,9 +44,13 @@ public class NetUtil {
         URL url;
         try {
             url = new URL(address.trim());
-            InputStream in = url.openStream();
+            URLConnection connection =  url.openConnection();
+            connection.setConnectTimeout(5000);
+            connection.connect();
+            /*InputStream in = url.openStream();*/
             result = true;
-        } catch (Exception ignore) {
+        } catch (Exception e) {
+            logger.error("connection refused, address = " + address, e);
         }
         return result;
     }

@@ -32,9 +32,9 @@ public class SiteInfoController {
 
     @RequestMapping(value = "/saveSiteImage", method = RequestMethod.POST)
     @ResponseBody
-    public Response saveSiteImage(@RequestParam("siteImage") MultipartFile multipartFile, HttpServletRequest request) throws IOException {
+    public Response saveSiteImage(@RequestParam("siteImage") MultipartFile  multipartFile, HttpServletRequest request) throws IOException {
         String path = request.getSession().getServletContext().getRealPath("/saveSiteImage");
-        System.err.println(multipartFile.getOriginalFilename());
+       // System.err.println(multipartFile.getOriginalFilename());
         System.out.println(path);
         /*File filePath = new File(path);
         System.out.println("文件的保存路径：" + path);
