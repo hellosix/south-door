@@ -32,3 +32,5 @@ south-door:
   max-proxy-size: 200
   # default: http, other: tcp
   proxy-type: http
+  data:
+    site-image-path: E://project/hellosix/south-door/src/main/resources/public/images/site/

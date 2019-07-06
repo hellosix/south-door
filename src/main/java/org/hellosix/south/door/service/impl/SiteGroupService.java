@@ -75,8 +75,8 @@ public class SiteGroupService implements ISiteGroupService {
                 List<SiteInfo> siteInfoList = siteInfoDao.selectSiteInfoListByGroupId(groupId);
                 if (siteInfoList == null || siteInfoList.isEmpty()) {
                     siteGroupDao.deleteSiteGroupById(groupId);
+                    return true;
                 }
-                return true;
             } catch (Exception e) {
                 logger.error("delete group failed, group id = " + groupId, e);
             }

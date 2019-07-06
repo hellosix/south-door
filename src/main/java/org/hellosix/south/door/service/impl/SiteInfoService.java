@@ -6,14 +6,19 @@ import org.hellosix.south.door.model.SiteInfo;
 import org.hellosix.south.door.proxy.IProxyManage;
 import org.hellosix.south.door.service.ISiteInfoService;
 import org.hellosix.south.door.util.CommonUtil;
+import org.hellosix.south.door.util.ImageUtil;
 import org.hellosix.south.door.util.UrlUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.net.UnknownHostException;
 import java.util.List;
+import java.util.Objects;
+
+import static org.hellosix.south.door.util.ImageUtil.IMAGE_NAME_SUFFIX;
 
 /**
  * @author Jay.H.Zou
@@ -24,9 +29,10 @@ public class SiteInfoService implements ISiteInfoService {
 
     private static final Logger logger = LoggerFactory.getLogger(SiteInfoService.class);
 
-    private static String IMAGE_PATH_PREFIX = "/images/site/";
+    public static String IMAGE_PATH_PREFIX = "/images/";
 
-    private static String IMAGE_NAME_SUFFIX = ".png";
+    @Value("${south-door.data.site-image-path}")
+    private String siteImagePath;
 
     @Autowired
     private SiteInfoDao siteInfoDao;
@@ -35,40 +41,36 @@ public class SiteInfoService implements ISiteInfoService {
     private IProxyManage proxyManage;
 
     @Override
-    public boolean addSiteInfo(SiteInfo siteInfo) {
-        if (!verifyParam(siteInfo, false)) {
+    public boolean saveSiteInfo(SiteInfo siteInfo) {
+        if (!verifyParam(siteInfo)) {
             return false;
         }
-        return saveSiteInfo(siteInfo, true);
-    }
-
-    @Override
-    public boolean updateSiteInfo(SiteInfo siteInfo) {
-        if (!verifyParam(siteInfo, true)) {
-            return false;
-        }
-        proxyManage.stopProxyTask(siteInfo.getSiteId());
-        return saveSiteInfo(siteInfo, false);
-    }
-
-    private boolean saveSiteInfo(SiteInfo siteInfo, boolean isAdd) {
         siteInfo.setUpdateTime(CommonUtil.getCurrentTimestamp());
         boolean isProxy = siteInfo.getIsProxy();
         String address = siteInfo.getAddress();
         if (isProxy) {
             try {
-                address = UrlUtil.getProxyAddress(address, siteInfo.getProxyPort());
+                Integer proxyPort = siteInfo.getProxyPort();
+                if (proxyPort != null) {
+                    address = UrlUtil.getProxyAddress(address, proxyPort);
+                } else {
+                    return false;
+                }
             } catch (UnknownHostException e) {
                 logger.error("build proxy address failed.", e);
                 return false;
             }
         }
         siteInfo.setProxyAddress(address);
-        String imagePath = IMAGE_PATH_PREFIX + siteInfo.getSiteName().replaceAll(" ", "-").toLowerCase() + IMAGE_NAME_SUFFIX;
+
+        String imagePath = IMAGE_PATH_PREFIX + siteInfo.getSiteName().replaceAll(" ", "-") + IMAGE_NAME_SUFFIX;
+        SiteInfo oldSite = siteInfoDao.selectSiteInfoById(siteInfo.getSiteId());
+        if (oldSite != null) {
+            ImageUtil.updateImageName(siteImagePath, oldSite.getSiteName(), siteInfo.getSiteName());
+        }
         siteInfo.setImagePath(imagePath);
-        // TODO: 添加图片
         try {
-            if (isAdd) {
+            if (StringUtils.isBlank(siteInfo.getSiteId())) {
                 siteInfo.setSiteId(CommonUtil.getUUID());
                 siteInfoDao.insertSiteInfo(siteInfo);
             } else {
@@ -80,7 +82,6 @@ public class SiteInfoService implements ISiteInfoService {
             logger.error("add site info to db failed, " + siteInfo, e);
             return false;
         }
-
     }
 
     @Override
@@ -102,7 +103,11 @@ public class SiteInfoService implements ISiteInfoService {
     public boolean isExistSameSiteName(SiteInfo siteInfo) {
         try {
             SiteInfo site = siteInfoDao.selectSiteInfoByName(siteInfo.getSiteName());
-            return site != null;
+            if (site != null) {
+                return !Objects.equals(site.getSiteId(), siteInfo.getSiteId());
+            } else {
+                return false;
+            }
         } catch (Exception e) {
             logger.error("get site info by name failed.", e);
         }
@@ -143,18 +148,15 @@ public class SiteInfoService implements ISiteInfoService {
         }
     }
 
-    private boolean verifyParam(SiteInfo siteInfo, boolean isUpdate) {
+    private boolean verifyParam(SiteInfo siteInfo) {
         if (siteInfo == null) {
             return false;
         }
-        // TODO: 检验 URL
         if (StringUtils.isBlank(siteInfo.getSiteName())
+                || StringUtils.isBlank(siteInfo.getSiteName().replaceAll(" ", ""))
                 || StringUtils.isBlank(siteInfo.getAddress())
                 || StringUtils.isBlank(siteInfo.getGroupId())) {
             return false;
-        }
-        if (isUpdate) {
-            return StringUtils.isNotBlank(siteInfo.getSiteId());
         }
         return true;
     }

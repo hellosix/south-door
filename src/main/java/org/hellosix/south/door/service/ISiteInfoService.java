@@ -10,9 +10,7 @@ import java.util.List;
  */
 public interface ISiteInfoService {
 
-    boolean addSiteInfo(SiteInfo siteInfo);
-
-    boolean updateSiteInfo(SiteInfo siteInfo);
+    boolean saveSiteInfo(SiteInfo siteInfo);
 
     boolean deleteSiteInfo(String siteId);
 

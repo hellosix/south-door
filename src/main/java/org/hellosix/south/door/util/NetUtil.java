@@ -45,7 +45,7 @@ public class NetUtil {
         try {
             url = new URL(address.trim());
             URLConnection connection =  url.openConnection();
-            connection.setConnectTimeout(5000);
+            connection.setConnectTimeout(2000);
             connection.connect();
             /*InputStream in = url.openStream();*/
             result = true;

@@ -30,7 +30,7 @@ public interface SiteInfoDao {
             "VALUES (#{siteId}, #{groupId}, #{siteName}, #{address}, #{isProxy}, #{proxyPort}, #{imagePath}, #{proxyAddress}, #{description}, #{updateTime})")
     int insertSiteInfo(SiteInfo siteInfo);
 
-    @Update("UPDATE site_info SET site_nam = #{siteName}, address = #{address}, is_proxy = #{isProxy}, proxy_port = #{proxyPort}," +
+    @Update("UPDATE site_info SET site_name = #{siteName}, address = #{address}, is_proxy = #{isProxy}, proxy_port = #{proxyPort}," +
             "image_path = #{imagePath}, proxy_address = #{proxyAddress}, description = #{description}, update_time = #{updateTime}")
     int updateSiteInfo(SiteInfo siteInfo);
 
