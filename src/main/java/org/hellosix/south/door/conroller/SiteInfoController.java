@@ -9,11 +9,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.websocket.server.PathParam;
 import java.util.List;
 import java.util.Map;
@@ -41,7 +39,7 @@ public class SiteInfoController {
         if (siteInfo == null || siteInfo.get("siteName") == null) {
             return Response.fail("site name is empty");
         }
-        String siteName = siteInfo.get("siteName").toString();
+        String siteName = siteInfo.get("siteName").toString().trim();
         String siteId = siteInfo.get("siteId").toString();
         SiteInfo site = new SiteInfo();
         site.setSiteId(siteId);

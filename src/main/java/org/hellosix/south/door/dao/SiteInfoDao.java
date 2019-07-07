@@ -31,7 +31,8 @@ public interface SiteInfoDao {
     int insertSiteInfo(SiteInfo siteInfo);
 
     @Update("UPDATE site_info SET site_name = #{siteName}, address = #{address}, is_proxy = #{isProxy}, proxy_port = #{proxyPort}," +
-            "image_path = #{imagePath}, proxy_address = #{proxyAddress}, description = #{description}, update_time = #{updateTime}")
+            "image_path = #{imagePath}, proxy_address = #{proxyAddress}, description = #{description}, update_time = #{updateTime} " +
+            "WHERE site_id = #{siteId}")
     int updateSiteInfo(SiteInfo siteInfo);
 
     @Delete("DELETE FROM site_info WHERE site_id = #{siteId}")

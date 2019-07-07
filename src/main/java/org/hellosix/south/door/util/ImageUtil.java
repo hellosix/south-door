@@ -2,12 +2,12 @@ package org.hellosix.south.door.util;
 
 
 import org.apache.commons.lang3.StringUtils;
-import org.fit.cssbox.demo.ImageRenderer;
-import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.awt.*;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Jay.H.Zou
@@ -15,7 +15,7 @@ import java.io.*;
  */
 public class ImageUtil {
 
-    public static String IMAGE_NAME_SUFFIX = ".png";
+    public static String IMAGE_SUFFIX_PNG = ".png";
 
     /**
      * 保存文件，直接以multipartFile形式
@@ -34,7 +34,7 @@ public class ImageUtil {
             file.mkdirs();
         }
         FileInputStream fileInputStream = (FileInputStream) multipartFile.getInputStream();
-        BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(path + File.separator + siteName.replaceAll(" ", "-") + IMAGE_NAME_SUFFIX));
+        BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(path + File.separator + siteName.replaceAll(" ", "-") + IMAGE_SUFFIX_PNG));
         byte[] bs = new byte[1024];
         int len;
         while ((len = fileInputStream.read(bs)) != -1) {
@@ -48,7 +48,7 @@ public class ImageUtil {
         if (!filePath.endsWith("/")) {
             filePath += "/";
         }
-        File file = new File(filePath + siteName.replaceAll(" ", "-") + IMAGE_NAME_SUFFIX);
+        File file = new File(filePath + siteName.replaceAll(" ", "-") + IMAGE_SUFFIX_PNG);
         if (file.exists() && file.isFile()) {
             file.delete();
         }
@@ -58,7 +58,7 @@ public class ImageUtil {
         if (!filePath.endsWith("/")) {
             filePath += "/";
         }
-        File file = new File(filePath + oldSiteName.replaceAll(" ", "-") + IMAGE_NAME_SUFFIX);
+        File file = new File(filePath + oldSiteName.replaceAll(" ", "-") + IMAGE_SUFFIX_PNG);
         // 判断原文件是否存在（防止文件名冲突）
         if (!file.exists()) {
             return;
@@ -67,7 +67,7 @@ public class ImageUtil {
         if (StringUtils.isBlank(newSiteName)) {
             return;
         }
-        String newFilePath = filePath + newSiteName.replaceAll(" ", "-") + IMAGE_NAME_SUFFIX;
+        String newFilePath = filePath + newSiteName.replaceAll(" ", "-") + IMAGE_SUFFIX_PNG;
         try {
             File newFile = new File(newFilePath);
             file.renameTo(newFile); // 修改文件名
@@ -75,4 +75,22 @@ public class ImageUtil {
             err.printStackTrace();
         }
     }
+
+    public static List<File> getAllFiles(String filePath) {
+        if (!filePath.endsWith("/")) {
+            filePath += "/";
+        }
+        File file = new File(filePath);
+        if (file.exists() && file.isDirectory()) {
+            File[] files = file.listFiles();
+            List<File> fileList = new ArrayList<>(Arrays.asList(files));
+            return fileList;
+        }
+        return new ArrayList<>();
+    }
+
+    public static void main(String[] args) {
+        getAllFiles("E://project/hellosix/south-door/src/main/resources/public/images/site/");
+    }
+
 }

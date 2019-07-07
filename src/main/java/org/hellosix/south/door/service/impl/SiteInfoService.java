@@ -18,7 +18,7 @@ import java.net.UnknownHostException;
 import java.util.List;
 import java.util.Objects;
 
-import static org.hellosix.south.door.util.ImageUtil.IMAGE_NAME_SUFFIX;
+import static org.hellosix.south.door.util.ImageUtil.IMAGE_SUFFIX_PNG;
 
 /**
  * @author Jay.H.Zou
@@ -45,6 +45,7 @@ public class SiteInfoService implements ISiteInfoService {
         if (!verifyParam(siteInfo)) {
             return false;
         }
+        siteInfo.setSiteName(siteInfo.getSiteName().trim());
         siteInfo.setUpdateTime(CommonUtil.getCurrentTimestamp());
         boolean isProxy = siteInfo.getIsProxy();
         String address = siteInfo.getAddress();
@@ -63,7 +64,7 @@ public class SiteInfoService implements ISiteInfoService {
         }
         siteInfo.setProxyAddress(address);
 
-        String imagePath = IMAGE_PATH_PREFIX + siteInfo.getSiteName().replaceAll(" ", "-") + IMAGE_NAME_SUFFIX;
+        String imagePath = IMAGE_PATH_PREFIX + siteInfo.getSiteName().replaceAll(" ", "-") + IMAGE_SUFFIX_PNG;
         SiteInfo oldSite = siteInfoDao.selectSiteInfoById(siteInfo.getSiteId());
         if (oldSite != null) {
             ImageUtil.updateImageName(siteImagePath, oldSite.getSiteName(), siteInfo.getSiteName());
