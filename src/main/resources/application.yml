@@ -1,5 +1,5 @@
 server:
-  port: 8002
+  port: 8003
 
 spring:
   resources:
@@ -8,7 +8,7 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     url: jdbc:mysql://101.132.47.146:3306/south_door
     username: root
-    password: Coastline@918
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
     druid:
       initial-size: 5
