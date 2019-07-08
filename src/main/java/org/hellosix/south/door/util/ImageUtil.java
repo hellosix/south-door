@@ -17,6 +17,8 @@ public class ImageUtil {
 
     public static String IMAGE_SUFFIX_PNG = ".png";
 
+    public static String IMAGE_SUFFIX_JPG = ".jpg";
+
     /**
      * 保存文件，直接以multipartFile形式
      *
@@ -44,7 +46,7 @@ public class ImageUtil {
         bos.close();
     }
 
-    public static void deleteImage(String filePath, String siteName) {
+    /*public static void deleteImage(String filePath, String siteName) {
         if (!filePath.endsWith("/")) {
             filePath += "/";
         }
@@ -52,7 +54,7 @@ public class ImageUtil {
         if (file.exists() && file.isFile()) {
             file.delete();
         }
-    }
+    }*/
 
     public static void updateImageName(String filePath, String oldSiteName, String newSiteName) {
         if (!filePath.endsWith("/")) {
@@ -68,12 +70,8 @@ public class ImageUtil {
             return;
         }
         String newFilePath = filePath + newSiteName.replaceAll(" ", "-") + IMAGE_SUFFIX_PNG;
-        try {
-            File newFile = new File(newFilePath);
-            file.renameTo(newFile); // 修改文件名
-        } catch (Exception err) {
-            err.printStackTrace();
-        }
+        File newFile = new File(newFilePath);
+        file.renameTo(newFile); // 修改文件名
     }
 
     public static List<File> getAllFiles(String filePath) {
@@ -90,7 +88,7 @@ public class ImageUtil {
     }
 
     public static void main(String[] args) {
-        getAllFiles("E://project/hellosix/south-door/src/main/resources/public/images/site/");
+        getAllFiles("E://project/hellosix/south-door/src/main/resources/public/site/site/");
     }
 
 }

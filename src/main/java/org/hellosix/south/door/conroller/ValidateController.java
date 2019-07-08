@@ -1,7 +1,9 @@
 package org.hellosix.south.door.conroller;
 
 import org.hellosix.south.door.model.Response;
+import org.hellosix.south.door.model.SiteGroup;
 import org.hellosix.south.door.model.SiteInfo;
+import org.hellosix.south.door.service.ISiteGroupService;
 import org.hellosix.south.door.service.ISiteInfoService;
 import org.hellosix.south.door.util.NetUtil;
 import org.slf4j.Logger;
@@ -26,6 +28,19 @@ public class ValidateController {
     @Autowired
     private ISiteInfoService siteInfoService;
 
+    @Autowired
+    private ISiteGroupService siteGroupService;
+
+    @RequestMapping(value = "/groupName", method = RequestMethod.POST)
+    @ResponseBody
+    public Response validateGroupame(@RequestBody SiteGroup siteGroup) {
+        if (siteGroupService.isExistSameGroupName(siteGroup)) {
+            return Response.fail(siteGroup.getGroupName() + " exist!");
+        }
+        return Response.success();
+    }
+
+
     @RequestMapping(value = "/siteName", method = RequestMethod.POST)
     @ResponseBody
     public Response validateSiteName(@RequestBody SiteInfo siteInfo) {
@@ -48,34 +63,6 @@ public class ValidateController {
         }
         boolean status = NetUtil.accessPort(proxyPort);
         return status ? Response.fail() : Response.success();
-        /*Socket socket = new Socket();
-        try {
-            InetAddress addr = InetAddress.getByName(server.getHost());
-            socket.connect(new InetSocketAddress(addr, server.getPort()), 1000);
-            return true;
-        } catch (IOException e) {
-            return false;
-        } finally {
-            try {
-                if (socket != null)
-                    socket.close();
-            } catch (Exception e) {
-                logger.error(e.getMessage());
-            }
-        }*/
-        /*boolean res = true;
-        res = proxyLogic.checkProxyPort(proxyPort);
-        if (res) {
-            return new Response(ERROR_CODE, "proxy port is already exist", false);
-        }
-        res = NetUtil.checkIp(ip);
-        if (!res) {
-            return new Response(ERROR_CODE, "the ip is not can use able", false);
-        }
-        res = NetUtil.checkIpAndPort(ip, port);
-        if (!res) {
-            return new Response(ERROR_CODE, "the port is not can access", false);
-        }*/
     }
 
 }

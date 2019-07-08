@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -88,7 +89,10 @@ public class SiteGroupService implements ISiteGroupService {
     public boolean isExistSameGroupName(SiteGroup siteGroup) {
         try {
             SiteGroup existSiteGroup = siteGroupDao.selectGroupByName(siteGroup.getGroupName());
-            return existSiteGroup != null;
+            if (existSiteGroup != null) {
+                return !Objects.equals(siteGroup.getGroupId(), existSiteGroup.getGroupId());
+            }
+            return false;
         } catch (Exception e) {
             logger.error("get site group by name failed, " + siteGroup, e);
         }

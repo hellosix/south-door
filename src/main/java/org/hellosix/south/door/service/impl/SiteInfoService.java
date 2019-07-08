@@ -17,7 +17,9 @@ import org.springframework.stereotype.Service;
 import java.net.UnknownHostException;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
+import static org.hellosix.south.door.util.ImageUtil.IMAGE_SUFFIX_JPG;
 import static org.hellosix.south.door.util.ImageUtil.IMAGE_SUFFIX_PNG;
 
 /**
@@ -29,7 +31,9 @@ public class SiteInfoService implements ISiteInfoService {
 
     private static final Logger logger = LoggerFactory.getLogger(SiteInfoService.class);
 
-    public static String IMAGE_PATH_PREFIX = "/images/";
+    public static String DEFAULT_IMAGE_PATH_PREFIX = "/public/default-site/";
+
+    public static String IMAGE_PATH_PREFIX = "/site/";
 
     @Value("${south-door.data.site-image-path}")
     private String siteImagePath;
@@ -64,18 +68,27 @@ public class SiteInfoService implements ISiteInfoService {
         }
         siteInfo.setProxyAddress(address);
 
-        String imagePath = IMAGE_PATH_PREFIX + siteInfo.getSiteName().replaceAll(" ", "-") + IMAGE_SUFFIX_PNG;
-        SiteInfo oldSite = siteInfoDao.selectSiteInfoById(siteInfo.getSiteId());
-        if (oldSite != null) {
-            ImageUtil.updateImageName(siteImagePath, oldSite.getSiteName(), siteInfo.getSiteName());
-        }
-        siteInfo.setImagePath(imagePath);
+        String imagePath = null;
+
+
         try {
             if (StringUtils.isBlank(siteInfo.getSiteId())) {
+                imagePath = DEFAULT_IMAGE_PATH_PREFIX + new Random().nextInt(16) + IMAGE_SUFFIX_JPG;
                 siteInfo.setSiteId(CommonUtil.getUUID());
+                siteInfo.setImagePath(imagePath);
                 siteInfoDao.insertSiteInfo(siteInfo);
             } else {
-                siteInfoDao.updateSiteInfo(siteInfo);
+                SiteInfo oldSite = siteInfoDao.selectSiteInfoById(siteInfo.getSiteId());
+                if (oldSite != null) {
+                    try {
+                        ImageUtil.updateImageName(siteImagePath, oldSite.getSiteName(), siteInfo.getSiteName());
+                        imagePath = IMAGE_PATH_PREFIX + siteInfo.getSiteName().replaceAll(" ", "-") + IMAGE_SUFFIX_PNG;
+                        siteInfo.setImagePath(imagePath);
+                        siteInfoDao.updateSiteInfo(siteInfo);
+                    } catch (Exception e) {
+                        logger.error("update image name failed", e);
+                    }
+                }
             }
 
             return true;
@@ -87,7 +100,6 @@ public class SiteInfoService implements ISiteInfoService {
 
     @Override
     public boolean deleteSiteInfo(String siteId) {
-        // TODO: 删除图片
         if (StringUtils.isNotBlank(siteId)) {
             try {
                 siteInfoDao.deleteSiteInfoById(siteId);
@@ -161,4 +173,5 @@ public class SiteInfoService implements ISiteInfoService {
         }
         return true;
     }
+
 }

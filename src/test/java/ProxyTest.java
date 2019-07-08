@@ -46,7 +46,6 @@ public class ProxyTest {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                System.err.println("=======================");
             }
         });
     }

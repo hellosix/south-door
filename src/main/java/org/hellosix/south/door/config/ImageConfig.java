@@ -10,6 +10,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.servlet.MultipartConfigElement;
+import java.io.File;
 
 /**
  * @author Jay.H.Zou
@@ -27,7 +28,11 @@ public class ImageConfig implements WebMvcConfigurer {
         if (StringUtils.isEmpty(siteImagePath)) {
             throw new RuntimeException("south-door.data.site-image-path is null.");
         }
-        registry.addResourceHandler("/images/**").addResourceLocations("file:" + siteImagePath);
+        File file = new File(siteImagePath);
+        if (!file.exists() || !file.isDirectory()) {
+            throw new RuntimeException("image path not exist or not directory!");
+        }
+        registry.addResourceHandler("/site/**").addResourceLocations("file:" + siteImagePath);
     }
 
     @Bean
