@@ -1,21 +1,24 @@
-# south-door
-> 南天门站点管理平台，支持 tcp 代理功能
+# South Door
+站点收藏平台，支持 HTTP 和 TCP 代理。
+> 如果该工具对您有帮助，可以给我们个 star 支持一下，谢谢！ ^_^
+使用过程中如果有问题或者建议可以给我们提 Issue。
 
-## 一、特性
+## 功能
+* 网站收藏
+* 网站代理，例如：服务部署到线上，而本地无法访问，这个时候可以在跳板机使用 HTTP 或 TCP 代理来访问
 
-#### 1 支持网页收藏功能，自动生成网页缩略图
-#### 2 支持 tcp 代理，假设服务部署到线上本地无法访问可以这个时候可以在跳板机使用 tcp 代理来访问
+## Index
 
-## 二、使用方式
-> 南天门主要包含来两个模块到功能：网页收藏、tcp 代理
+![](https://user-gold-cdn.xitu.io/2019/7/8/16bd2294cb9e3ad6?w=1925&h=1216&f=png&s=25937)
 
-#### 1 首页截图
-<img src="./docs/south-door.png"/>
+![](https://user-gold-cdn.xitu.io/2019/7/8/16bd227fded90509?w=1925&h=1216&f=png&s=287716)
 
-#### 2 网页收藏
-> 收藏到网页会自动生成缩略图
-<img src="./docs/url.png"/>
- 
-#### 3 tcp 代理 
-> 原理：在本地启动代理端口，然后通过socket client链接远程IP:port,将返回到数据写入到 代理端口
-<img src="./docs/proxy.png"/>
+## Group Mange
+
+![](https://user-gold-cdn.xitu.io/2019/7/8/16bd22a0250c0748?w=1925&h=1216&f=png&s=37277)
+
+## Site Manage
+
+![](https://user-gold-cdn.xitu.io/2019/7/8/16bd22a31f7b64cc?w=1925&h=1216&f=png&s=53467)
+
+![](https://user-gold-cdn.xitu.io/2019/7/8/16bd22ad956436ab?w=1925&h=1216&f=png&s=34787)
