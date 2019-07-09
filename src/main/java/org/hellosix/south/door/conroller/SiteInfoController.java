@@ -35,7 +35,6 @@ public class SiteInfoController {
     @RequestMapping(value = "/saveSiteImage", method = RequestMethod.POST)
     @ResponseBody
     public Response saveSiteImage(@RequestParam("siteImage") MultipartFile multipartFile,@RequestParam Map<String, Object> siteInfo) {
-        System.err.println(siteInfo);
         if (siteInfo == null || siteInfo.get("siteName") == null) {
             return Response.fail("site name is empty");
         }
