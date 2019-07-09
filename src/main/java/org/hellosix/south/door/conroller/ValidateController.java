@@ -57,11 +57,17 @@ public class ValidateController {
 
     @RequestMapping(value = "/proxyPort", method = RequestMethod.POST)
     @ResponseBody
-    public Response validateProxyPort(@RequestBody Integer proxyPort) {
-        if (proxyPort == null) {
+    public Response validateProxyPort(@RequestBody SiteInfo siteInfo) {
+        if (siteInfo == null || siteInfo.getProxyPort() == null) {
             return Response.fail();
         }
-        boolean status = NetUtil.accessPort(proxyPort);
+        SiteInfo siteInfoById = siteInfoService.getSiteInfoById(siteInfo.getSiteId());
+        int newProxyPort = siteInfo.getProxyPort();
+        Integer oldProxyPort = siteInfoById.getProxyPort();
+        if (siteInfoById.getProxyPort() != null && newProxyPort == oldProxyPort) {
+            return Response.success();
+        }
+        boolean status = NetUtil.accessPort(newProxyPort);
         return status ? Response.fail() : Response.success();
     }
 
