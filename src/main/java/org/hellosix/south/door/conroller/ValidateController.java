@@ -63,9 +63,11 @@ public class ValidateController {
         }
         SiteInfo siteInfoById = siteInfoService.getSiteInfoById(siteInfo.getSiteId());
         int newProxyPort = siteInfo.getProxyPort();
-        Integer oldProxyPort = siteInfoById.getProxyPort();
-        if (siteInfoById.getProxyPort() != null && newProxyPort == oldProxyPort) {
-            return Response.success();
+        if (siteInfoById != null) {
+            Integer oldProxyPort = siteInfoById.getProxyPort();
+            if (siteInfoById.getProxyPort() != null && newProxyPort == oldProxyPort) {
+                return Response.success();
+            }
         }
         boolean status = NetUtil.accessPort(newProxyPort);
         return status ? Response.fail() : Response.success();

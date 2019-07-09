@@ -34,10 +34,9 @@ public abstract class ProxyManageAbstract implements IProxyManage {
      */
     protected Map<String, Runnable> proxySiteMap;
 
-    @Scheduled(initialDelay = 5000, fixedRate = 5000)
+    @Scheduled(initialDelay = 10000, fixedRate = 5000)
     public void checkProxyTasks() {
         try {
-            // TODO: 添加反向检查，是否有多余的代理
             startProxyTasks();
         } catch (Exception e) {
             logger.error("The scheduled task failed to start.", e);

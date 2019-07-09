@@ -40,6 +40,7 @@ public class HttpProxyTask implements Runnable {
         servletContextHandler.addServlet(servletHolder, "/*");
         try {
             server.start();
+            logger.info("proxy " + proxyPort + " successfully, site name = " + siteInfo.getSiteName());
         } catch (Exception e) {
             logger.error("server start failed, site info: " + siteInfo, e);
             if (server != null) {

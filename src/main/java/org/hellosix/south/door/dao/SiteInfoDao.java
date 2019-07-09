@@ -35,6 +35,9 @@ public interface SiteInfoDao {
             "WHERE site_id = #{siteId}")
     int updateSiteInfo(SiteInfo siteInfo);
 
+    @Update("UPDATE site_info SET image_path = #{imagePath} WHERE site_id = #{siteId}")
+    int updateImagePath(SiteInfo siteInfo);
+
     @Delete("DELETE FROM site_info WHERE site_id = #{siteId}")
     int deleteSiteInfoById(String siteId);
 }

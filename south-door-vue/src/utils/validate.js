@@ -48,7 +48,7 @@ export function validateEmail(email) {
 }
 
 export function isEmpty(val) {
-  return val == null || val === 'undefined' || val === ''
+  return val == null || val === 'undefined' || val === '' || val === 'null'
 }
 
 export function isNotEmpty(val) {

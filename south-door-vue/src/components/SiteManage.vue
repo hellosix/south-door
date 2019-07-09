@@ -89,7 +89,7 @@ export default {
       let deletingSite = this.deletingSite;
       if (isNotEmpty(deletingSite.siteId)) {
         this.$axios
-          .post("/api/site/deleteSiteById", deletingSite.siteId)
+          .post("/site/deleteSiteById", deletingSite.siteId)
           .then(response => {
             if (response.data.code == 0) {
               this.siteList.forEach(function(site, index, arr) {
@@ -113,7 +113,7 @@ export default {
     let user = sessionStorage.getItem("user");
     if (user) {
       this.$axios
-        .get("/api/site/getAllSite")
+        .get("/site/getAllSite")
         .then(response => {
           this.siteList = response.data.data;
         })

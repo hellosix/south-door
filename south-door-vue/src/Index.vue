@@ -36,7 +36,7 @@
           <el-menu-item index="-1" class="user-info no-active">
             <el-dropdown trigger="hover" v-if="isLogin">
               <span class="el-dropdown-link userinfo-inner">
-                <img :src="'/api'+userInfo.headPic" class="head-pic" />
+               <img :src="userInfo.headPic" class="head-pic" />
                 {{ userInfo.userName }}
               </span>
               <el-dropdown-menu slot="dropdown">
@@ -133,7 +133,7 @@ export default {
       this.$refs[userInfo].validate(valid => {
         if (valid) {
           this.$axios
-            .post("/api/user/login", this.userInfo)
+            .post("/user/login", this.userInfo)
             .then(response => {
               if (response.data.code == 0) {
                 this.userInfo = response.data.data;
@@ -199,7 +199,7 @@ export default {
     },
     getGroupList() {
       this.$axios
-        .get("/api/group/getGroupList")
+        .get("/group/getGroupList")
         .then(response => {
           this.groupList = response.data.sort(function(group1, group2) {
             return group1.groupName.localeCompare(group2.groupName, "zh-CN");

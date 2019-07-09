@@ -6,7 +6,9 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -37,6 +39,15 @@ public class HttpProxyManage extends ProxyManageAbstract implements ApplicationL
 
     @Override
     public void startProxyTasks() {
+        logger.info("start proxy task schedule");
+        Set<String> siteIdList = proxySiteMap.keySet();
+        for (String siteId : siteIdList) {
+            SiteInfo siteInfo = siteInfoDao.selectSiteInfoById(siteId);
+            if (siteInfo == null) {
+                logger.warn("stop proxy by schedule, id = " + siteId);
+                stopProxyTask(siteId);
+            }
+        }
         List<SiteInfo> siteInfoList = siteInfoDao.selectSiteInfoList();
         if (siteInfoList != null && !siteInfoList.isEmpty()) {
             for (SiteInfo siteInfo : siteInfoList) {
@@ -73,9 +84,10 @@ public class HttpProxyManage extends ProxyManageAbstract implements ApplicationL
             if (runnable != null) {
                 HttpProxyTask httpProxyTask = (HttpProxyTask) runnable;
                 httpProxyTask.stop();
+                proxySiteMap.remove(siteId);
             }
             siteInfo = siteInfoDao.selectSiteInfoById(siteId);
-            logger.info("stopping server socket...");
+            logger.info("stop server socket successfully!");
         } catch (Exception e) {
             logger.error("server socket closed failed. site info: " + siteInfo);
         }

@@ -15,8 +15,10 @@ Vue.use(ElementUI)
 Vue.config.productionTip = false
 
 Vue.prototype.$axios = axios
-axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
-
+axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'
+// axios.defaults.baseURL = 'http://localhost:8000/api/'
+// axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*'
+// axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

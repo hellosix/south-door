@@ -12,12 +12,12 @@
       <div class="card-wrapper">
         <div class="image-wrapper">
           <a :href="site.proxyAddress" target="_blank">
-            <el-image fit="cover" :src="'/api' + site.imagePath" class="image site-image"></el-image>
+            <el-image fit="cover" :src="site.imagePath" class="image site-image"></el-image>
           </a>
         </div>
         <div class="content-wrapper">
           <div class="content-item between">
-            <div class>{{ site.siteName }}</div>
+            <div class="name-wrapper">{{ site.siteName }}</div>
             <el-rate
               v-model="site.rate"
               :colors="colors"
@@ -38,7 +38,7 @@
 <script>
 import { mapGetters } from "vuex";
 import { store } from "../vuex/store.js";
-import { isNotEmpty } from "../utils/validate.js";
+import { isNotEmpty, isEmpty } from "../utils/validate.js";
 export default {
   props: ["groupId"],
   name: "site-list",
@@ -51,12 +51,14 @@ export default {
   },
   methods: {
     getSiteList(groupId) {
+      
       this.$axios
-        .get("/api/site/getSiteByGroupId?groupId=" + groupId)
+        .get("/site/getSiteByGroupId?groupId=" + groupId)
         .then(response => {
           let siteList = response.data.data;
           let siteRateMap = store.getters.getSiteRateMap;
           for (let site of siteList) {
+            //site.imagePath = "/api/" + site.imagePath;
             let rate = siteRateMap[site.siteId];
             if (isNotEmpty(rate)) {
               site.rate = rate;
@@ -66,6 +68,7 @@ export default {
           store.dispatch("setSiteList", this.siteList);
         })
         .catch(err => {
+          console.log(err);
           this.$message.error("Network error");
         });
     },
@@ -88,6 +91,7 @@ export default {
     }
   },
   mounted() {
+    store.dispatch("setSiteList", []);
     let groupId = this.$route.params.groupId;
     if (groupId) {
       this.getSiteList(groupId);
@@ -167,7 +171,16 @@ export default {
   color: #007fff;
 }
 
+.name-wrapper {
+  font-size: 14px;
+  max-width: 50%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .description {
+  max-width: 80%;
   white-space: nowrap;
   text-overflow: ellipsis;
   -o-text-overflow: ellipsis;

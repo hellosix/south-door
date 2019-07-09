@@ -1,13 +1,13 @@
 <template>
-  <div class="main">
+  <div class="home-wrapper">
     <img src="../assets/main.svg" />
     <p class="welcome">Welcome to South Door!</p>
   </div>
 </template>
 
 <style>
-.main {
-  margin: 15%;
+.home-wrapper {
+  margin: 12%;
 }
 .welcome {
   color: #007fff;

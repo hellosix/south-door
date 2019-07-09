@@ -12,6 +12,8 @@ public interface ISiteInfoService {
 
     boolean saveSiteInfo(SiteInfo siteInfo);
 
+    boolean updateImage(SiteInfo siteInfo);
+
     boolean deleteSiteInfo(String siteId);
 
     boolean isExistSameSiteName(SiteInfo siteInfo);

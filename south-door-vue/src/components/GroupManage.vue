@@ -107,7 +107,7 @@ export default {
         return callback(new Error("Please enter group name."));
       } else {
         this.$axios
-          .post("/api/validate/groupName", this.operationGroup)
+          .post("/validate/groupName", this.operationGroup)
           .then(response => {
             if (response.data.code == 0) {
               callback();
@@ -148,7 +148,7 @@ export default {
       let operationGroup = this.operationGroup;
       if (isNotEmpty(operationGroup.groupId)) {
         this.$axios
-          .post("/api/group/deleteGroupById", operationGroup.groupId)
+          .post("/group/deleteGroupById", operationGroup.groupId)
           .then(response => {
             if (response.data.code == 0) {
               this.groupList.forEach(function(group, index, arr) {
@@ -177,7 +177,7 @@ export default {
           let operationGroup = this.operationGroup;
           if (isEmpty(operationGroup.groupId)) {
             this.$axios
-              .post("/api/group/addGroup", operationGroup)
+              .post("/group/addGroup", operationGroup)
               .then(response => {
                 if (response.data.code == 0) {
                   groupList.push(response.data.data);
@@ -192,7 +192,7 @@ export default {
               });
           } else {
             this.$axios
-              .post("/api/group/updateGroup", operationGroup)
+              .post("/group/updateGroup", operationGroup)
               .then(response => {
                 if (response.data.code == 0) {
                   groupList.forEach(function(group, index) {

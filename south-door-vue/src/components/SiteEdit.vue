@@ -16,7 +16,7 @@
                 <el-upload
                   class="avatar-uploader"
                   name="siteImage"
-                  action="/api/site/saveSiteImage"
+                  action="/site/saveSiteImage"
                   :show-file-list="false"
                   :on-success="handleAvatarSuccess"
                   :on-error="handleImageError"
@@ -38,7 +38,7 @@
               label-width="110px"
             >
               <el-form-item label="Site Name" prop="siteName">
-                <el-input v-model="siteInfo.siteName" maxlength="25" show-word-limit></el-input>
+                <el-input v-model="siteInfo.siteName" maxlength="30" show-word-limit></el-input>
               </el-form-item>
               <el-form-item label="Group" prop="groupId">
                 <el-select
@@ -102,7 +102,7 @@ export default {
         return callback(new Error("Please enter site name."));
       } else {
         this.$axios
-          .post("/api/validate/siteName", this.siteInfo)
+          .post("/validate/siteName", this.siteInfo)
           .then(response => {
             if (response.data.code == 0) {
               this.disabledUpload = false;
@@ -134,7 +134,7 @@ export default {
         } else {
           // 验证此网站是否可访问
           this.$axios
-            .post("/api/validate/address", value)
+            .post("/validate/address", value)
             .then(response => {
               if (response.data.code == 0) {
                 callback();
@@ -158,7 +158,7 @@ export default {
             return callback(new Error("Please enter integer for port!"));
           }
           this.$axios
-            .post("/api/validate/proxyPort", value)
+            .post("/validate/proxyPort", this.siteInfo)
             .then(response => {
               if (response.data.code == 0) {
                 callback();
@@ -233,17 +233,18 @@ export default {
           this.loading = true;
           this.siteInfo.groupId = this.groupId;
           this.$axios
-            .post("/api/site/saveSiteInfo", this.siteInfo)
+            .post("/site/saveSiteInfo", this.siteInfo)
             .then(response => {
               this.loading = true;
               if (response.data.code == 0) {
                 this.$router.push({ name: "site-manage" });
               } else {
+                this.loading = false;
                 this.$message.error("Save site info failed.");
               }
             })
             .catch(err => {
-              this.loading = true;
+              this.loading = false;
               this.$message.error("Network error.");
             });
         }
@@ -257,12 +258,12 @@ export default {
     },
     getSiteInfo(siteId) {
       this.$axios
-        .get("/api/site/getSiteInfoById?siteId=" + siteId)
+        .get("/site/getSiteInfoById?siteId=" + siteId)
         .then(response => {
           this.siteInfo = response.data.data;
           this.groupId = this.siteInfo.groupId;
           this.image.name = this.siteInfo.siteName;
-          this.image.url = "api" + this.siteInfo.imagePath;
+          this.image.url = this.siteInfo.imagePath;
         })
         .catch(err => {
           this.$message.error("Network error.");
@@ -270,8 +271,14 @@ export default {
     },
     handleAvatarSuccess(res, file, fileList) {
       this.image.url = URL.createObjectURL(file.raw);
+      this.loading = false;
+      this.$message({
+        message: "Upload image successfully!",
+        type: "success"
+      });
     },
     handleImageError(err, file, fileList) {
+      this.loading = false;
       this.$message.error("Upload image failed.");
     },
     beforeAvatarUpload(file) {
@@ -294,6 +301,7 @@ export default {
       if (!isLt2M) {
         this.$message.error("Upload image size can't exceed 10MB!");
       }
+      this.loading = false;
       return isJPGOrPNG && isLt2M;
     },
     handleChange(file, fileList) {

@@ -47,6 +47,7 @@ public class SiteInfoController {
             boolean existSameSiteName = siteInfoService.isExistSameSiteName(site);
             if (!existSameSiteName) {
                 ImageUtil.saveImage(multipartFile, siteImagePath, siteName);
+                siteInfoService.updateImage(site);
             } else {
                 Response.fail(siteName + " exist!");
             }

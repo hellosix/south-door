@@ -36,7 +36,7 @@ public class ImageUtil {
             file.mkdirs();
         }
         FileInputStream fileInputStream = (FileInputStream) multipartFile.getInputStream();
-        BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(path + File.separator + siteName.replaceAll(" ", "-") + IMAGE_SUFFIX_PNG));
+        BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(path + File.separator + getImageNameBySiteName(siteName)));
         byte[] bs = new byte[1024];
         int len;
         while ((len = fileInputStream.read(bs)) != -1) {
@@ -46,21 +46,16 @@ public class ImageUtil {
         bos.close();
     }
 
-    /*public static void deleteImage(String filePath, String siteName) {
-        if (!filePath.endsWith("/")) {
-            filePath += "/";
-        }
-        File file = new File(filePath + siteName.replaceAll(" ", "-") + IMAGE_SUFFIX_PNG);
-        if (file.exists() && file.isFile()) {
-            file.delete();
-        }
-    }*/
+    public static boolean existImage(String filePath, String siteName) {
+        File file = new File(filePath + getImageNameBySiteName(siteName));
+        return file.exists();
+    }
 
     public static void updateImageName(String filePath, String oldSiteName, String newSiteName) {
         if (!filePath.endsWith("/")) {
             filePath += "/";
         }
-        File file = new File(filePath + oldSiteName.replaceAll(" ", "-") + IMAGE_SUFFIX_PNG);
+        File file = new File(filePath + getImageNameBySiteName(oldSiteName));
         // 判断原文件是否存在（防止文件名冲突）
         if (!file.exists()) {
             return;
@@ -69,7 +64,7 @@ public class ImageUtil {
         if (StringUtils.isBlank(newSiteName)) {
             return;
         }
-        String newFilePath = filePath + newSiteName.replaceAll(" ", "-") + IMAGE_SUFFIX_PNG;
+        String newFilePath = filePath + getImageNameBySiteName(newSiteName);
         File newFile = new File(newFilePath);
         file.renameTo(newFile); // 修改文件名
     }
@@ -87,8 +82,13 @@ public class ImageUtil {
         return new ArrayList<>();
     }
 
+    public static String getImageNameBySiteName(String siteName) {
+        return siteName.replaceAll(" ", "-") + IMAGE_SUFFIX_PNG;
+    }
+
     public static void main(String[] args) {
         getAllFiles("E://project/hellosix/south-door/src/main/resources/public/site/site/");
     }
+
 
 }

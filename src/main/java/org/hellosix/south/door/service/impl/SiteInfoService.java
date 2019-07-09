@@ -19,8 +19,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
-import static org.hellosix.south.door.util.ImageUtil.IMAGE_SUFFIX_JPG;
-import static org.hellosix.south.door.util.ImageUtil.IMAGE_SUFFIX_PNG;
+import static org.hellosix.south.door.util.ImageUtil.*;
 
 /**
  * @author Jay.H.Zou
@@ -50,6 +49,7 @@ public class SiteInfoService implements ISiteInfoService {
             return false;
         }
         siteInfo.setSiteName(siteInfo.getSiteName().trim());
+        String siteName = siteInfo.getSiteName();
         siteInfo.setUpdateTime(CommonUtil.getCurrentTimestamp());
         boolean isProxy = siteInfo.getIsProxy();
         String address = siteInfo.getAddress();
@@ -68,33 +68,46 @@ public class SiteInfoService implements ISiteInfoService {
         }
         siteInfo.setProxyAddress(address);
 
-        String imagePath = null;
-
-
+        String imagePath = getImagePathBySiteName(siteName);
+        siteInfo.setImagePath(imagePath);
         try {
             if (StringUtils.isBlank(siteInfo.getSiteId())) {
-                imagePath = DEFAULT_IMAGE_PATH_PREFIX + new Random().nextInt(16) + IMAGE_SUFFIX_JPG;
+                // 如果不存在，则设置空
+                if (!ImageUtil.existImage(siteImagePath, siteName)) {
+                    siteInfo.setImagePath(DEFAULT_IMAGE_PATH_PREFIX + new Random().nextInt(16) + IMAGE_SUFFIX_JPG);
+                }
                 siteInfo.setSiteId(CommonUtil.getUUID());
-                siteInfo.setImagePath(imagePath);
                 siteInfoDao.insertSiteInfo(siteInfo);
             } else {
                 SiteInfo oldSite = siteInfoDao.selectSiteInfoById(siteInfo.getSiteId());
                 if (oldSite != null) {
                     try {
-                        ImageUtil.updateImageName(siteImagePath, oldSite.getSiteName(), siteInfo.getSiteName());
-                        imagePath = IMAGE_PATH_PREFIX + siteInfo.getSiteName().replaceAll(" ", "-") + IMAGE_SUFFIX_PNG;
-                        siteInfo.setImagePath(imagePath);
-                        proxyManage.stopProxyTask(siteInfo.getSiteId());
+                        ImageUtil.updateImageName(siteImagePath, oldSite.getSiteName(), siteName);
+                        if (!Objects.equals(oldSite.getProxyPort(), siteInfo.getProxyPort())) {
+                            proxyManage.stopProxyTask(siteInfo.getSiteId());
+                        }
                         siteInfoDao.updateSiteInfo(siteInfo);
                     } catch (Exception e) {
                         logger.error("update image name failed", e);
                     }
                 }
             }
-
             return true;
         } catch (Exception e) {
             logger.error("add site info to db failed, " + siteInfo, e);
+            return false;
+        }
+    }
+
+    @Override
+    public boolean updateImage(SiteInfo siteInfo) {
+        String imagePath = getImagePathBySiteName(siteInfo.getSiteName());
+        siteInfo.setImagePath(imagePath);
+        try {
+            siteInfoDao.updateImagePath(siteInfo);
+            return true;
+        } catch (Exception e) {
+            logger.error("update image path failed, " + siteInfo, e);
             return false;
         }
     }
@@ -175,4 +188,7 @@ public class SiteInfoService implements ISiteInfoService {
         return true;
     }
 
+    private String getImagePathBySiteName(String siteName) {
+        return IMAGE_PATH_PREFIX + getImageNameBySiteName(siteName);
+    }
 }

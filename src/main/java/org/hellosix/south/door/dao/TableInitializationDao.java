@@ -26,7 +26,7 @@ public interface TableInitializationDao {
             "address varchar(255) NOT NULL," +
             "is_proxy tinyint(1) DEFAULT 0," +
             "proxy_port MEDIUMINT UNSIGNED DEFAULT NULL," +
-            "image_path varchar(255) NOT NULL," +
+            "image_path varchar(255) DEFAULT NULL," +
             "proxy_address varchar(255) NOT NULL," +
             "description varchar(255) DEFAULT NULL," +
             "update_time datetime NOT NULL," +
