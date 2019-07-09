@@ -31,15 +31,12 @@ public class GroupController {
     @ResponseBody
     public List<SiteGroup> getGroupList() {
         List<SiteGroup> siteGroupList = siteGroupService.getSiteGroupList();
-
-        logger.info(siteGroupList.toString());
         return siteGroupList;
     }
 
     @RequestMapping(value = "/addGroup", method = RequestMethod.POST)
     @ResponseBody
     public Response addGroup(@RequestBody SiteGroup siteGroup) {
-        // 存在
         if (siteGroupService.isExistSameGroupName(siteGroup)) {
             return Response.fail(siteGroup.getGroupName() + " exist!");
         }
