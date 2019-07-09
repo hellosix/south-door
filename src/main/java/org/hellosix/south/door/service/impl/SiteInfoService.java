@@ -84,6 +84,7 @@ public class SiteInfoService implements ISiteInfoService {
                         ImageUtil.updateImageName(siteImagePath, oldSite.getSiteName(), siteInfo.getSiteName());
                         imagePath = IMAGE_PATH_PREFIX + siteInfo.getSiteName().replaceAll(" ", "-") + IMAGE_SUFFIX_PNG;
                         siteInfo.setImagePath(imagePath);
+                        proxyManage.stopProxyTask(siteInfo.getSiteId());
                         siteInfoDao.updateSiteInfo(siteInfo);
                     } catch (Exception e) {
                         logger.error("update image name failed", e);
