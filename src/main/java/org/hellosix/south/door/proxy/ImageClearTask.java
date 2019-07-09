@@ -30,7 +30,10 @@ public class ImageClearTask {
     @Autowired
     protected SiteInfoDao siteInfoDao;
 
-    @Scheduled(initialDelay = 6000000, fixedRate = 6000000)
+    /**
+     * 每周天 01:00 点实行一次
+     */
+    @Scheduled(cron = "0 0 1 ? * 1")
     public void clearImages() {
         try {
             List<SiteInfo> siteInfoList = siteInfoDao.selectSiteInfoList();
