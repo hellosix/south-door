@@ -67,7 +67,7 @@ public class UserService implements IUserService {
             return true;
         }
         user.setUserId(CommonUtil.getUUID());
-        user.setHeadPic("/site/user/default.png");
+        user.setHeadPic("/public/user/default.jpg");
         user.setUpdateTime(CommonUtil.getCurrentTimestamp());
         try {
             userDao.insertUser(user);
