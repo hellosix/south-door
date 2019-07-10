@@ -96,7 +96,7 @@ export default {
   data() {
     return {
       activeIndex: "",
-      keywords: "",
+      keywords: store.getters.getKeywords,
       currentGroupName: "Group List",
       groupId: "",
       isLogin: false,

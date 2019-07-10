@@ -92,11 +92,15 @@ export const store = new Vuex.Store({
     getters,
     actions,
     mutations,
-    plugins: [createPersistedState({
-        storage: {
-            getItem: key => Cookies.get(key),
-            setItem: (key, value) => Cookies.set(key, value, { expires: 36500 }),
-            removeItem: key => Cookies.remove(key)
+    plugins: [createPersistedState(
+        {
+            reducer(val) {
+                return {
+                // siteRateMap
+                siteRateMap: val.siteRateMap
+            }
         }
-    })]
+        }
+    )]
 })
+

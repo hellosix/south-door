@@ -91,8 +91,19 @@ export default {
     }
   },
   mounted() {
-    store.dispatch("setSiteList", []);
     let groupId = this.$route.params.groupId;
+    let groupList = store.getters.getGroupList;
+    for (var group in groupList) {
+      if (group.groupId == groupId) {
+        localStorage.setItem(
+          "lastSelectedGroup",
+          JSON.stringify({
+            groupId: group.groupId,
+            groupName: group.groupName
+          })
+        );
+      }
+    }
     if (groupId) {
       this.getSiteList(groupId);
     }
