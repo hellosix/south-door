@@ -86,6 +86,9 @@ public class SiteInfoService implements ISiteInfoService {
                         if (!Objects.equals(oldSite.getProxyPort(), siteInfo.getProxyPort())) {
                             proxyManage.stopProxyTask(siteInfo.getSiteId());
                         }
+                        if (!ImageUtil.existImage(siteImagePath, siteName)) {
+                            siteInfo.setImagePath(oldSite.getImagePath());
+                        }
                         siteInfoDao.updateSiteInfo(siteInfo);
                     } catch (Exception e) {
                         logger.error("update image name failed", e);
