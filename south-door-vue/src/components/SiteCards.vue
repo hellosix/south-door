@@ -134,15 +134,19 @@ export default {
   flex-direction: column;
   border: 1px solid #e4e7ed;
   background-color: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
 
 .card-wrapper:hover {
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.2);
 }
 
 .image-wrapper {
   flex: 1;
   overflow: hidden;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
 }
 
 .image {
